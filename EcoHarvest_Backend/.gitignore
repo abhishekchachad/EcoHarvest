@@ -2,11 +2,8 @@
 node_modules/
 package-lock.json
 
-# Build files
-dist/
-.vite/
-.vitepress/
-.cache/
+# Environment variables
+.env
 
 # Logs & Cache
 *.log
