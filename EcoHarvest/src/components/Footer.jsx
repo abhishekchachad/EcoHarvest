@@ -1,9 +1,10 @@
 import React from "react";
+import "../styles/index.css";
 
 const Footer = () => {
   return (
-    <footer style={{ padding: "10px", textAlign: "center", background: "#f4f4f4" }}>
-      <p>© 2025 EcoHarvest. All Rights Reserved.</p>
+    <footer className="footer">
+      <p>&copy; 2025 Farmer Home. All rights reserved.</p>
     </footer>
   );
 };

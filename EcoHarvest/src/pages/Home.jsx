@@ -1,28 +1,33 @@
 import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import "../styles/index.css";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
-      <header style={{ textAlign: "center", padding: "20px", background: "#f4f4f4" }}>
-        <h1>Welcome to EcoHarvest</h1>
-        <p>Your one-stop shop for organic products</p>
-      </header>
-
-      <main style={{ padding: "20px" }}>
-        <h2>Featured Products</h2>
-        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-          <div style={{ border: "1px solid #ddd", padding: "10px", borderRadius: "5px" }}>
-            <h3>Product 1</h3>
-            <p>Product description...</p>
-          </div>
-          <div style={{ border: "1px solid #ddd", padding: "10px", borderRadius: "5px" }}>
-            <h3>Product 2</h3>
-            <p>Product description...</p>
-          </div>
+      <Navbar />
+      <main className="hero">
+        <div className="hero-text">
+          <h1>Eco Harvest Farming</h1>
+          <p>
+            Donec rutrum congue leo eget malesuada. Donec sollicitudin molestie malesuada.
+            Curabitur aliquet quam id dui posuere blandit. Quisque velit nisi, pretium ut
+            lacinia in, elementum id enim.
+          </p>
+          <button className="shop-button">Shop Online</button>
+        </div>
+        <div className="hero-image">
+          <img 
+            src="https://storage.googleapis.com/a1aa/image/eenVLYXvS0d3UrCiBv4rztdSofkT7hI_PeqbUtfBABI.jpg"
+            alt="A basket of fresh tomatoes and other vegetables"
+          />
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
