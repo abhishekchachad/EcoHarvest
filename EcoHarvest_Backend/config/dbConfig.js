@@ -1,3 +1,4 @@
+// EcoHarvest_Backend/config/dbConfig.js
 const sql = require('mssql');
 require('dotenv').config();
 

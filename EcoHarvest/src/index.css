@@ -1,4 +1,4 @@
-/* Global Styles */
+/* ====== Global Styles ====== */
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f9f9f9;
@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 
-/* Navbar */
+/* ====== Navbar ====== */
 .navbar {
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,7 @@ body {
 }
 
 .site-logo {
-  width: 40px; /* Adjust size as needed */
+  width: 40px;
   height: 40px;
   margin-right: 10px;
 }
@@ -50,7 +50,13 @@ body {
   color: #4CAF50;
 }
 
-/* Cart Icon */
+/* Cart Icon & Signup Button */
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .cart-icon {
   font-size: 1.5rem;
   color: #555;
@@ -62,14 +68,49 @@ body {
   color: #4CAF50;
 }
 
-/* Hero Section */
-.hero {
+.signup-button {
+  background-color: transparent;
+  border: 2px solid #4CAF50;
+  color: #4CAF50;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.signup-button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* ====== Home Page Full Height Fix ====== */
+.home-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh; /* ✅ Ensures full-screen height */
+}
+
+/* Hero Section Fix */
+.hero {
+  flex: 1; /* ✅ Expands to take available space */
+  display: flex;
+  justify-content: center;
   align-items: center;
   padding: 60px 30px;
 }
 
+/* Footer Fix */
+.footer {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 1rem;
+  margin-top: auto; /* ✅ Pushes footer to the bottom */
+}
+
+/* ====== Hero Section ====== */
 .hero-text {
   max-width: 500px;
 }
@@ -110,17 +151,114 @@ body {
   border-radius: 50% 50% 30% 70% / 60% 30% 70% 40%;
 }
 
-/* Footer */
-.footer {
-  background-color: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  font-size: 1rem;
+/* ====== Signup & Login Modal Styles ====== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Responsive Design */
+/* Modal Content */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 350px;
+  max-width: 90%; /* ✅ Ensures responsiveness */
+  position: relative;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Close Icon (❌) */
+.close-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s ease-in-out;
+}
+
+.close-icon:hover {
+  color: red;
+}
+
+/* Input Fields */
+.modal-content input {
+  display: block;
+  width: calc(100% - 20px); /* ✅ Ensures it fits inside modal */
+  padding: 10px;
+  margin: 8px auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Error Text */
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Password Strength Meter */
+.password-strength {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Strength Levels */
+.password-strength.weak {
+  color: red;
+}
+.password-strength.fair {
+  color: orange;
+}
+.password-strength.good {
+  color: yellow;
+}
+.password-strength.strong {
+  color: green;
+}
+
+/* Submit Button */
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Signup/Login Switch Text */
+.switch-text {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.switch-link {
+  color: #4CAF50;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.switch-link:hover {
+  text-decoration: underline;
+}
+
+/* ====== Responsive Design ====== */
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -136,5 +274,13 @@ body {
   .navbar .nav-links {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .navbar-icons {
+    flex-direction: column;
+  }
+
+  .modal-content {
+    width: 90%;
   }
 }

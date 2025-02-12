@@ -1,3 +1,5 @@
+// EcoHarvest/src/pages/addProduct.jsx
+
 import React, { useState } from 'react';
 import axios from 'axios';
 

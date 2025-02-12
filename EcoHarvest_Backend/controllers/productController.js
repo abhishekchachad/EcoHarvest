@@ -1,3 +1,5 @@
+// EcoHarvest_Backend/controllers/productController.js
+
 const { sql, poolPromise } = require('../config/dbConfig');
 
 // Get All Products

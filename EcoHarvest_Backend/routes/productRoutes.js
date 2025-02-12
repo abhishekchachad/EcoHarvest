@@ -1,3 +1,5 @@
+// EcoHarvest_Backend/routes/productRoutes.js
+
 const express = require('express');
 const { getProducts, addProduct } = require('../controllers/productController');
 
