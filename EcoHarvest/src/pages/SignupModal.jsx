@@ -36,18 +36,18 @@ const SignupModal = ({ onClose, switchToLogin }) => {
     if (!username || !email || !password) return alert("❌ All fields are required!");
 
     try {
-        // ✅ Ensure correct API endpoint
+        // Ensure correct API endpoint
         const response = await axios.post("http://localhost:5000/api/users", { 
             username, 
             email, 
             password 
         });
 
-        alert("✅ Signup successful! Please log in.");
+        alert("Signup successful! Please log in.");
         switchToLogin(); // Switch to Login modal after successful signup
     } catch (error) {
-        console.error("❌ Signup Error:", error.response?.data?.error || error.message);
-        alert(error.response?.data?.error || "❌ Signup failed. Please try again.");
+        console.error("Signup Error:", error.response?.data?.error || error.message);
+        alert(error.response?.data?.error || "Signup failed. Please try again.");
     }
 };
 
@@ -55,7 +55,6 @@ const SignupModal = ({ onClose, switchToLogin }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        {/* Close Icon (❌) */}
         <FaTimes className="close-icon" onClick={onClose} />
 
         <h2>Sign Up</h2>

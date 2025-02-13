@@ -12,12 +12,12 @@ const AddProduct = () => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/products', { name, price, description });
-            alert('✅ Product added successfully!');
+            alert('Product added successfully!');
             setName('');
             setPrice('');
             setDescription('');
         } catch (error) {
-            console.error('❌ Error adding product:', error);
+            console.error('Error adding product:', error);
         }
     };
 

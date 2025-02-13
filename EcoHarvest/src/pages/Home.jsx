@@ -12,12 +12,12 @@ const HomePage = () => {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    setIsLoggedIn(!!user); // ✅ Ensure it updates correctly
+    setIsLoggedIn(!!user); // Ensure it updates correctly
   }, []);
 
   const handleShopClick = () => {
     if (isLoggedIn) {
-      alert("🛒 Redirecting to Shop...");
+      alert("Redirecting to Shop...");
     } else {
       setShowLogin(true);
     }
@@ -30,7 +30,7 @@ const HomePage = () => {
       <main className="hero">
         <div className="hero-text">
           <h1>Eco Harvest Farming</h1>
-          <p>Discover the best organic products for a healthier lifestyle. Join us today and explore nature’s finest!</p>
+          <p>At Eco Harvest, we believe in sustainable and chemical-free farming to provide you with the freshest and healthiest organic products. Our mission is to bring farm-fresh goodness straight to your doorstep while supporting local farmers and promoting eco-friendly agricultural practices.</p>
           <button className="shop-button" onClick={handleShopClick}>
             Shop Online
           </button>

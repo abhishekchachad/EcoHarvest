@@ -9,7 +9,7 @@ const LoginModal = ({ onClose, switchToSignup }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!email || !password) return alert("❌ All fields are required!");
+    if (!email || !password) return alert("All fields are required!");
 
     try {
         const response = await axios.post("http://localhost:5000/api/users/login", {
@@ -18,16 +18,16 @@ const LoginModal = ({ onClose, switchToSignup }) => {
         });
 
         if (response.data.user) {
-            alert("✅ Login Successful!");
+            alert("Login Successful!");
             localStorage.setItem("user", JSON.stringify(response.data.user));
             onClose();
             window.location.reload();
         } else {
-            alert("❌ Invalid credentials");
+            alert("Invalid credentials");
         }
     } catch (error) {
-        console.error("❌ Login Error:", error.response?.data?.error || error.message);
-        alert(error.response?.data?.error || "❌ Login failed. Please try again.");
+        console.error("Login Error:", error.response?.data?.error || error.message);
+        alert(error.response?.data?.error || "Login failed. Please try again.");
     }
 };
 
@@ -35,7 +35,7 @@ const LoginModal = ({ onClose, switchToSignup }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        {/* Close Icon (❌) */}
+      
         <FaTimes className="close-icon" onClick={onClose} />
 
         <h2>Login</h2>
@@ -59,7 +59,7 @@ const LoginModal = ({ onClose, switchToSignup }) => {
           <button type="submit">Login</button>
         </form>
 
-        {/* Switch to Signup Modal */}
+      
         <p className="switch-text">
           Don't have an account?{" "}
           <span onClick={switchToSignup} className="switch-link">
