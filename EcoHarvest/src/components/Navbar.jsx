@@ -11,7 +11,7 @@ const Navbar = () => {
       <header className="navbar">
         {/* Logo and Cart Section */}
         <div className="logo-section">
-          <img src="/logo.png" alt="Eco-Harvest-Logo" className="site-logo" />
+          <img src="/logo.jpeg" alt="Eco-Harvest-Logo" className="site-logo" />
           <span className="logo-text">Eco Harvest</span>
         </div>
 

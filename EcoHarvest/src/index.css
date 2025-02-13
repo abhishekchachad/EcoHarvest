@@ -127,6 +127,7 @@ body {
   margin-top: 10px;
 }
 
+/* ✅ Updated Shop Button with Animation */
 .shop-button {
   margin-top: 20px;
   padding: 12px 24px;
@@ -136,11 +137,20 @@ body {
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; /* ✅ Smooth transition effect */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* ✅ Hover Effect */
 .shop-button:hover {
   background-color: #45a049;
+  transform: scale(1.05); /* ✅ Slight zoom effect on hover */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Button Click Animation */
+.shop-button:active {
+  transform: scale(0.95); /* ✅ Slight shrink effect on click */
 }
 
 /* Hero Image */
