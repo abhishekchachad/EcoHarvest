@@ -6,7 +6,7 @@ import "../styles/index.css";
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>&copy; 2025 Farmer Home. All rights reserved.</p>
+      <p>&copy; 2025 Eco Harvest. All rights reserved.</p>
     </footer>
   );
 };
