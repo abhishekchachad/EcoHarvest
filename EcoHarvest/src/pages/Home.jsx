@@ -25,8 +25,6 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
-      <Navbar />
-
       <main className="hero">
         <div className="hero-text">
           <h1>Eco Harvest Farming</h1>
@@ -60,8 +58,6 @@ const HomePage = () => {
           }}
         />
       )}
-
-      <Footer />
     </div>
   );
 };

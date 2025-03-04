@@ -294,3 +294,135 @@ body {
     width: 90%;
   }
 }
+
+/* ====== Contact Us Page Styles ====== */
+.contact-page {
+  padding: 40px 20px; /* Padding around the contact page */
+  background-color: #f9f9f9; /* Matches the global background */
+}
+
+.contact-container {
+  max-width: 600px; /* Center the form */
+  margin: 0 auto; /* Center horizontally */
+  background-color: white; /* White background for the form */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 30px; /* Padding inside the container */
+}
+
+.contact-container h2 {
+  font-size: 2rem; /* Larger font size for the title */
+  color: #2c3e50; /* Dark color for the title */
+  margin-bottom: 20px; /* Space below the title */
+  text-align: center; /* Center the title */
+}
+
+.contact-container p.loyalty-text {
+  font-size: 1rem; /* Font size for the loyalty text */
+  color: #666; /* Gray color for the text */
+  text-align: center; /* Center the text */
+  margin-bottom: 30px; /* Space below the text */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column; /* Stack inputs vertically */
+}
+
+.contact-form label {
+  font-size: 1rem; /* Font size for labels */
+  margin-bottom: 5px; /* Space below labels */
+  color: #555; /* Dark gray color for labels */
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px; /* Padding inside inputs */
+  margin-bottom: 15px; /* Space below inputs */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size for inputs */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.contact-form textarea {
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 100px; /* Minimum height for the textarea */
+}
+
+.submit-button {
+  background-color: #4CAF50; /* Green background for the button */
+  color: white; /* White text color */
+  padding: 12px; /* Padding inside the button */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 1rem; /* Font size for the button */
+  transition: background-color 0.3s ease-in-out; /* Smooth transition */
+}
+
+.submit-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.success-message {
+  color: #4CAF50; /* Green color for success message */
+  font-size: 1rem; /* Font size for success message */
+  text-align: center; /* Center the message */
+  margin-top: 20px; /* Space above the message */
+}
+
+.error-message {
+  color: red; /* Red color for error message */
+  font-size: 1rem; /* Font size for error message */
+  text-align: center; /* Center the message */
+  margin-top: 20px; /* Space above the message */
+}
+/* ====== About Us Page Styles ====== */
+.about-container {
+  max-width: 800px; /* Maximum width for the about section */
+  margin: 40px auto; /* Center the container with margin */
+  padding: 20px; /* Padding inside the container */
+  background-color: white; /* White background for the about section */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.about-container h2 {
+  font-size: 2.5rem; /* Larger font size for the title */
+  color: #2c3e50; /* Dark color for the title */
+  margin-bottom: 20px; /* Space below the title */
+  text-align: center; /* Center the title */
+}
+
+.about-container p.loyalty-text {
+  font-size: 1.2rem; /* Slightly larger font size for loyalty text */
+  color: #4CAF50; /* Green color for the loyalty text */
+  text-align: center; /* Center the loyalty text */
+  margin-bottom: 30px; /* Space below the loyalty text */
+}
+
+.about-content {
+  font-size: 1rem; /* Font size for the content */
+  color: #555; /* Dark gray color for the text */
+  line-height: 1.6; /* Line height for better readability */
+}
+
+.about-content p {
+  margin-bottom: 20px; /* Space below each paragraph */
+}
+
+/* Responsive Design for About Us Page */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .about-container h2 {
+    font-size: 2rem; /* Adjust title size for smaller screens */
+  }
+
+  .about-content {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+}
