@@ -1,15 +1,19 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
-
-const userRoutes = require('./routes/userRoutes'); // ✅ Ensure this is imported
+const { poolPromise } = require('./config/dbConfig');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// ✅ Ensure the /api/users route is available
-app.use('/api/users', userRoutes);
+// ✅ Import and use product routes
+const productRoutes = require('./routes/productRoutes');
+app.use('/api', productRoutes); // ✅ Ensure /api prefix is used
+
+// Simple test route
+app.get('/', async (req, res) => {
+    res.json({ message: "🚀 API is working!" });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

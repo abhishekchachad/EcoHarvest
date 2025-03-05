@@ -1,8 +1,6 @@
-// EcoHarvest_Backend/controllers/productController.js
-
 const { sql, poolPromise } = require('../config/dbConfig');
 
-// Get All Products
+// ✅ Get All Products
 const getProducts = async (req, res) => {
     try {
         const pool = await poolPromise;
@@ -13,7 +11,7 @@ const getProducts = async (req, res) => {
     }
 };
 
-// Add New Product
+// ✅ Add New Product
 const addProduct = async (req, res) => {
     const { name, price, description } = req.body;
     try {
@@ -30,4 +28,4 @@ const addProduct = async (req, res) => {
     }
 };
 
-module.exports = { getProducts, addProduct };
+module.exports = { getProducts, addProduct }; // ✅ Ensure both functions are exported

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { useSignIn } from '@clerk/clerk-react'; // Clerk Authentication Hook
+import { useSignIn } from '@clerk/clerk-react';
+import axios from 'axios'; // ✅ Added Axios for API request
 import '../styles/index.css';
 
 const LoginModal = ({ onClose, switchToSignup }) => {
@@ -21,8 +22,12 @@ const LoginModal = ({ onClose, switchToSignup }) => {
 
       if (result.status === 'complete') {
         setActive({ session: result.createdSessionId });
+
+        // ✅ Store the user in local DB
+        await axios.post('http://localhost:5000/api/users', { email });
+
         alert('Login Successful!');
-        onClose(); // Close modal after login
+        onClose();
         window.location.reload();
       }
     } catch (err) {

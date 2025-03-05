@@ -1,19 +1,19 @@
-// EcoHarvest_Backend/config/dbConfig.js
+require('dotenv').config(); // Ensure .env is loaded
+
 const sql = require('mssql');
-require('dotenv').config();
 
 const config = {
-    user: process.env.DB_USER,
+    user: process.env.DB_USER,  
     password: process.env.DB_PASS,
     server: process.env.DB_HOST,
     database: process.env.DB_NAME,
+    port: parseInt(process.env.DB_PORT, 10),
     options: {
-        encrypt: true,
+        encrypt: false, // Set to false for local servers
         trustServerCertificate: true
     }
 };
 
-// Connect to SQL Server
 const poolPromise = new sql.ConnectionPool(config)
     .connect()
     .then(pool => {

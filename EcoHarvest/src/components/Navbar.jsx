@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
-import '../styles/index.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import "../styles/index.css";
 
 const Navbar = () => {
   return (
@@ -18,21 +18,14 @@ const Navbar = () => {
         <Link to="/products">Products</Link>
         <Link to="/about">About Us</Link>
         <Link to="/contact">Contact Us</Link>
+        <Link to="/admin" className="admin-link">Admin Panel</Link>
       </nav>
 
       {/* Authentication & Cart */}
       <div className="navbar-icons">
         <FaShoppingCart className="cart-icon" />
-
-        {/* Show Sign In button when user is signed out */}
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-
-        {/* Show User Profile & Logout button when signed in */}
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+        <SignedOut><SignInButton /></SignedOut>
+        <SignedIn><UserButton /></SignedIn>
       </div>
     </header>
   );

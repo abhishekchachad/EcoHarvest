@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
-import { useSignUp } from '@clerk/clerk-react'; // Clerk Signup Hook
+import { useSignUp } from '@clerk/clerk-react';
+import axios from 'axios'; // ✅ Added Axios for API request
 import '../styles/index.css';
 
 const SignupModal = ({ onClose, switchToLogin }) => {
@@ -14,15 +15,18 @@ const SignupModal = ({ onClose, switchToLogin }) => {
     if (!isLoaded) return;
 
     try {
-      await signUp.create({
+      const result = await signUp.create({
         emailAddress: email,
         password,
       });
 
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
 
+      // ✅ Store the user in local DB
+      await axios.post('http://localhost:5000/api/users', { email });
+
       alert('Verification email sent! Please check your inbox.');
-      switchToLogin(); // Redirect to login modal
+      switchToLogin();
     } catch (err) {
       setError('Signup failed. Please try again.');
     }
