@@ -1,3 +1,4 @@
+// EcoHarvest/src/pages/LoginModal.jsx
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useSignIn } from '@clerk/clerk-react';

@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 
-/* ====== Navbar ====== */
+/* ====== Navbar Styles ====== */
 .navbar {
   background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -16,7 +16,6 @@ body {
   align-items: center;
 }
 
-/* Logo Section */
 .logo-section {
   display: flex;
   align-items: center;
@@ -33,7 +32,6 @@ body {
   font-weight: bold;
 }
 
-/* Navigation Links */
 .nav-links {
   display: flex;
   gap: 20px;
@@ -50,7 +48,6 @@ body {
   color: #4CAF50;
 }
 
-/* Cart Icon & Signup Button */
 .navbar-icons {
   display: flex;
   align-items: center;
@@ -84,33 +81,32 @@ body {
   color: white;
 }
 
-/* ====== Home Page Full Height Fix ====== */
-.home-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* ✅ Ensures full-screen height */
-}
-
-/* Hero Section Fix */
-.hero {
-  flex: 1; /* ✅ Expands to take available space */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 30px;
-}
-
-/* Footer Fix */
+/* ====== Footer Styles ====== */
 .footer {
   background-color: #2c3e50;
   color: white;
   text-align: center;
   padding: 20px;
   font-size: 1rem;
-  margin-top: auto; /* ✅ Pushes footer to the bottom */
+  margin-top: auto;
 }
 
-/* ====== Hero Section ====== */
+/* ====== Home Page Styles ====== */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 30px;
+}
+
 .hero-text {
   max-width: 500px;
 }
@@ -127,7 +123,6 @@ body {
   margin-top: 10px;
 }
 
-/* ✅ Updated Shop Button with Animation */
 .shop-button {
   margin-top: 20px;
   padding: 12px 24px;
@@ -137,20 +132,14 @@ body {
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out; /* ✅ Smooth transition effect */
+  transition: all 0.3s ease-in-out;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Hover Effect */
 .shop-button:hover {
   background-color: #45a049;
-  transform: scale(1.05); /* ✅ Slight zoom effect on hover */
+  transform: scale(1.05);
   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* ✅ Button Click Animation */
-.shop-button:active {
-  transform: scale(0.95); /* ✅ Slight shrink effect on click */
 }
 
 /* Hero Image */
@@ -161,275 +150,49 @@ body {
   border-radius: 50% 50% 30% 70% / 60% 30% 70% 40%;
 }
 
-/* ====== Signup & Login Modal Styles ====== */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Modal Content */
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 350px;
-  max-width: 90%; /* ✅ Ensures responsiveness */
-  position: relative;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Close Icon (❌) */
-.close-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #555;
-  transition: color 0.3s ease-in-out;
-}
-
-.close-icon:hover {
-  color: red;
-}
-
-/* Input Fields */
-.modal-content input {
-  display: block;
-  width: calc(100% - 20px); /* ✅ Ensures it fits inside modal */
-  padding: 10px;
-  margin: 8px auto;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-/* Error Text */
-.error-text {
-  color: red;
-  font-size: 0.9rem;
-  text-align: left;
-}
-
-/* Password Strength Meter */
-.password-strength {
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-/* Strength Levels */
-.password-strength.weak {
-  color: red;
-}
-.password-strength.fair {
-  color: orange;
-}
-.password-strength.good {
-  color: yellow;
-}
-.password-strength.strong {
-  color: green;
-}
-
-/* Submit Button */
-.modal-content button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Signup/Login Switch Text */
-.switch-text {
-  margin-top: 10px;
-  font-size: 0.9rem;
-}
-
-.switch-link {
-  color: #4CAF50;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.switch-link:hover {
-  text-decoration: underline;
-}
-
-/* ====== Responsive Design ====== */
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-image img {
-    width: 300px;
-    height: 300px;
-    margin-top: 20px;
-  }
-
-  .navbar .nav-links {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .navbar-icons {
-    flex-direction: column;
-  }
-
-  .modal-content {
-    width: 90%;
-  }
-}
-
-/* ====== Contact Us Page Styles ====== */
-.contact-page {
-  padding: 40px 20px; /* Padding around the contact page */
-  background-color: #f9f9f9; /* Matches the global background */
-}
-
-.contact-container {
-  max-width: 600px; /* Center the form */
-  margin: 0 auto; /* Center horizontally */
-  background-color: white; /* White background for the form */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  padding: 30px; /* Padding inside the container */
-}
-
-.contact-container h2 {
-  font-size: 2rem; /* Larger font size for the title */
-  color: #2c3e50; /* Dark color for the title */
-  margin-bottom: 20px; /* Space below the title */
-  text-align: center; /* Center the title */
-}
-
-.contact-container p.loyalty-text {
-  font-size: 1rem; /* Font size for the loyalty text */
-  color: #666; /* Gray color for the text */
-  text-align: center; /* Center the text */
-  margin-bottom: 30px; /* Space below the text */
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column; /* Stack inputs vertically */
-}
-
-.contact-form label {
-  font-size: 1rem; /* Font size for labels */
-  margin-bottom: 5px; /* Space below labels */
-  color: #555; /* Dark gray color for labels */
-}
-
-.contact-form input,
-.contact-form textarea {
-  padding: 10px; /* Padding inside inputs */
-  margin-bottom: 15px; /* Space below inputs */
-  border: 1px solid #ddd; /* Light border */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 1rem; /* Font size for inputs */
-  box-sizing: border-box; /* Include padding in width */
-}
-
-.contact-form textarea {
-  resize: vertical; /* Allow vertical resizing */
-  min-height: 100px; /* Minimum height for the textarea */
-}
-
-.submit-button {
-  background-color: #4CAF50; /* Green background for the button */
-  color: white; /* White text color */
-  padding: 12px; /* Padding inside the button */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 1rem; /* Font size for the button */
-  transition: background-color 0.3s ease-in-out; /* Smooth transition */
-}
-
-.submit-button:hover {
-  background-color: #45a049; /* Darker green on hover */
-}
-
-.success-message {
-  color: #4CAF50; /* Green color for success message */
-  font-size: 1rem; /* Font size for success message */
-  text-align: center; /* Center the message */
-  margin-top: 20px; /* Space above the message */
-}
-
-.error-message {
-  color: red; /* Red color for error message */
-  font-size: 1rem; /* Font size for error message */
-  text-align: center; /* Center the message */
-  margin-top: 20px; /* Space above the message */
-}
 /* ====== About Us Page Styles ====== */
 .about-container {
-  max-width: 800px; /* Maximum width for the about section */
-  margin: 40px auto; /* Center the container with margin */
-  padding: 20px; /* Padding inside the container */
-  background-color: white; /* White background for the about section */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .about-container h2 {
-  font-size: 2.5rem; /* Larger font size for the title */
-  color: #2c3e50; /* Dark color for the title */
-  margin-bottom: 20px; /* Space below the title */
-  text-align: center; /* Center the title */
+  font-size: 2.5rem;
+  color: #2c3e50;
+  text-align: center;
 }
 
-.about-container p.loyalty-text {
-  font-size: 1.2rem; /* Slightly larger font size for loyalty text */
-  color: #4CAF50; /* Green color for the loyalty text */
-  text-align: center; /* Center the loyalty text */
-  margin-bottom: 30px; /* Space below the loyalty text */
+.about-container p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
-.about-content {
-  font-size: 1rem; /* Font size for the content */
-  color: #555; /* Dark gray color for the text */
-  line-height: 1.6; /* Line height for better readability */
+.about-container ul {
+  list-style: none;
+  padding: 0;
 }
 
-.about-content p {
-  margin-bottom: 20px; /* Space below each paragraph */
+.about-container ul li {
+  padding: 10px;
+  background: #f1f8e9;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-/* Responsive Design for About Us Page */
-@media (max-width: 768px) {
-  .about-container {
-    padding: 15px; /* Reduce padding on smaller screens */
-  }
-
-  .about-container h2 {
-    font-size: 2rem; /* Adjust title size for smaller screens */
-  }
-
-  .about-content {
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
-  }
-}
+/* ====== Admin Panel Styles ====== */
 .admin-container {
-  max-width: 800px;
-  margin: auto;
+  max-width: 1200px;
+  margin: 20px auto;
   padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
@@ -450,23 +213,92 @@ body {
   color: white;
 }
 
-button {
-  padding: 8px 12px;
-  margin: 5px;
-  border: none;
-  cursor: pointer;
+.product-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
-.edit-btn {
-  background-color: #ffcc00;
-  color: black;
+/* ====== Contact Page Styles ====== */
+.contact-page {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
 }
 
-.delete-btn {
-  background-color: #ff5733;
-  color: white;
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
 }
 
-button:hover {
-  opacity: 0.8;
+.contact-container h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.contact-form input, .contact-form textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* ====== Product Page Styles ====== */
+.products-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-image img {
+    width: 300px;
+    height: 300px;
+    margin-top: 20px;
+  }
+
+  .navbar .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .admin-table th, .admin-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
 }

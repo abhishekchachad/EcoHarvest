@@ -1,3 +1,5 @@
+
+// EcoHarvest/src/pages/SignupModal.jsx
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useSignUp } from '@clerk/clerk-react';

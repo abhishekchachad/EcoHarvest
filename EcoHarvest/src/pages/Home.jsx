@@ -1,3 +1,4 @@
+// EcoHarvest/src/pages/Home.jsx
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -12,7 +13,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    setIsLoggedIn(!!user); // Ensure it updates correctly
+    setIsLoggedIn(!!user);
   }, []);
 
   const handleShopClick = () => {
@@ -25,39 +26,22 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
+      {/* Hero Section */}
       <main className="hero">
         <div className="hero-text">
-          <h1>Eco Harvest Farming</h1>
-          <p>At Eco Harvest, we believe in sustainable and chemical-free farming to provide you with the freshest and healthiest organic products. Our mission is to bring farm-fresh goodness straight to your doorstep while supporting local farmers and promoting eco-friendly agricultural practices.</p>
-          <button className="shop-button" onClick={handleShopClick}>
-            Shop Online
+          <h1>EcoHarvest - Your Destination for Organic & Sustainable Farming</h1>
+          <p>
+            Welcome to EcoHarvest, where we believe in organic farming, sustainable agriculture, and delivering eco-friendly products to promote a healthier planet. 
+            Our mission is to empower farmers and consumers with farm-to-table food, non-GMO seeds, and chemical-free farming solutions that nurture both people and the environment.
+          </p>
+          <button className="shop-button" href="/products">
+            Shop Organic Products
           </button>
         </div>
         <div className="hero-image">
-          <img src="https://storage.googleapis.com/a1aa/image/eenVLYXvS0d3UrCiBv4rztdSofkT7hI_PeqbUtfBABI.jpg" alt="A basket of fresh tomatoes and other vegetables" />
+          <img src="https://storage.googleapis.com/a1aa/image/eenVLYXvS0d3UrCiBv4rztdSofkT7hI_PeqbUtfBABI.jpg" alt="A basket of fresh organic produce" />
         </div>
       </main>
-
-      {/* ✅ Ensure the login modal shows when triggered */}
-      {showLogin && (
-        <LoginModal
-          onClose={() => setShowLogin(false)}
-          switchToSignup={() => {
-            setShowLogin(false);
-            setShowSignup(true);
-          }}
-        />
-      )}
-
-      {showSignup && (
-        <SignupModal
-          onClose={() => setShowSignup(false)}
-          switchToLogin={() => {
-            setShowSignup(false);
-            setShowLogin(true);
-          }}
-        />
-      )}
     </div>
   );
 };

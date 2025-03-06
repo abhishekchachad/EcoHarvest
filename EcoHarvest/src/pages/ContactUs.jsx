@@ -1,3 +1,5 @@
+// EcoHarvest/src/pages/ContactUs.jsx
+
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
@@ -27,9 +29,9 @@ const ContactUs = () => {
   return (
     <div className="contact-page">
       <div className="contact-container">
-        <h2>Get in Touch with Us</h2>
+        <h1>Contact EcoHarvest - Your Trusted Organic Farming Partner</h1>
         <p className="loyalty-text">
-          "At EcoHarvest, our customers are our family. We value your feedback and are here to assist you every step of the way! 🌱💚"
+          "At EcoHarvest, we value our customers and their commitment to <strong>sustainable agriculture</strong>. Get in touch with us today for <strong>eco-friendly farming solutions</strong> and <strong>organic farming tools</strong>! 🌱💚"
         </p>
         <form className="contact-form" onSubmit={handleSubmit}>
           <label>Your Email:</label>
