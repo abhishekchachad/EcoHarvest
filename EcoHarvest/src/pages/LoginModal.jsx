@@ -1,15 +1,14 @@
-// EcoHarvest/src/pages/LoginModal.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useSignIn } from '@clerk/clerk-react';
-import axios from 'axios'; // ✅ Added Axios for API request
+import axios from 'axios'; 
 import '../styles/index.css';
 
 const LoginModal = ({ onClose, switchToSignup }) => {
   const { signIn, setActive, isLoaded } = useSignIn();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [error, setError] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,8 +23,13 @@ const LoginModal = ({ onClose, switchToSignup }) => {
       if (result.status === 'complete') {
         setActive({ session: result.createdSessionId });
 
-        // ✅ Store the user in local DB
-        await axios.post('http://localhost:5000/api/users', { email });
+        // ✅ Get Clerk User Details from session
+        const userData = {
+          email,
+        };
+
+        // ✅ Send User Data to Backend
+        await axios.post('http://localhost:5000/api/users', userData);
 
         alert('Login Successful!');
         onClose();

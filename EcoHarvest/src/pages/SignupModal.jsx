@@ -15,24 +15,30 @@ const SignupModal = ({ onClose, switchToLogin }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!isLoaded) return;
-
+  
     try {
       const result = await signUp.create({
         emailAddress: email,
         password,
       });
-
+  
       await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
-
-      // ✅ Store the user in local DB
-      await axios.post('http://localhost:5000/api/users', { email });
-
+  
+      // ✅ Store user in local SQL database
+      await axios.post('http://localhost:5000/api/users', {
+        username: email.split('@')[0], // Set username as email prefix
+        email,
+        password,  // Store password (backend will hash it)
+        role: 'user', // Default role
+      });
+  
       alert('Verification email sent! Please check your inbox.');
       switchToLogin();
     } catch (err) {
       setError('Signup failed. Please try again.');
     }
   };
+  
 
   return (
     <div className="modal-overlay">

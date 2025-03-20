@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ClerkProvider } from '@clerk/clerk-react';
 import './index.css';
 import './styles/global.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx';
 
 // Import your Publishable Key from environment variables

@@ -1,4 +1,3 @@
-
 // EcoHarvest/src/pages/Products.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -26,6 +25,21 @@ const Products = () => {
     fetchProducts();
   }, []);
 
+  // Function to add product to cart
+  const addToCart = async (product) => {
+    try {
+      await axios.post("http://localhost:5000/api/cart", {
+        user_id: 1,  // ✅ Hardcoded for now, replace with actual user ID from authentication
+        product_id: product.product_id,
+        quantity: 1,  // Default quantity = 1
+      });
+      alert(`${product.name} added to cart!`);
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
+  
+
   return (
     <div className="products-container">
       <h2>🌱 Our Organic Products</h2>
@@ -44,7 +58,10 @@ const Products = () => {
               <p><strong>Category:</strong> {product.category}</p>
               <p><strong>Stock:</strong> {product.stock_quantity} left</p>
               <p><strong>Price:</strong> ${product.price}</p>
-              <button className="buy-button">Buy Now</button>
+              <div className="product-buttons">
+                <button className="buy-button">Buy Now</button>
+                <button className="add-to-cart-button" onClick={() => addToCart(product)}>Add to Cart</button>
+              </div>
             </div>
           ))}
         </div>

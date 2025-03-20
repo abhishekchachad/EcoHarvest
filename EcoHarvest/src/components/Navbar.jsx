@@ -23,7 +23,9 @@ const Navbar = () => {
 
       {/* Authentication & Cart */}
       <div className="navbar-icons">
-        <FaShoppingCart className="cart-icon" />
+        <Link to="/cart" className="cart-link">
+          <FaShoppingCart className="cart-icon" />
+        </Link>
         <SignedOut><SignInButton /></SignedOut>
         <SignedIn><UserButton /></SignedIn>
       </div>
