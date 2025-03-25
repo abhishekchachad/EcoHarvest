@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useUser } from "@clerk/clerk-react"; // ✅ Import Clerk User Authentication
+import { Link } from "react-router-dom"; // ✅ Import Clerk User Authentication
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 

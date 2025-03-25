@@ -1,61 +1,62 @@
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react"; // ✅ Use Clerk Authentication
-import { useUser } from "@clerk/clerk-react"; // ✅ Get User Session
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/Home";
 import Products from "./pages/Products";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
-import AdminPage from "./pages/AdminPage";
-import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CheckoutPage";
+import AuthModal from "./pages/AuthModal"; // New combined modal
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/global.css"; 
-
-// ✅ Protect Admin Routes - Only Logged-in Users Can Access
-const ProtectedRoute = ({ children }) => {
-  const { isSignedIn, user } = useUser();
-  if (!isSignedIn || user.role !== "admin") {
-    return <RedirectToSignIn />;
-  }
-  return children;
-};
+import "./styles/global.css";
 
 const App = () => {
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState("login"); // 'login' or 'signup'
+
+  const handleAuthClick = () => {
+    setAuthMode("login");
+    setShowAuthModal(true);
+  };
+
+  const handleCloseAuth = () => {
+    setShowAuthModal(false);
+  };
+
+  const switchAuthMode = () => {
+    setAuthMode(authMode === "login" ? "signup" : "login");
+  };
+
+  const handleLogin = (email, password) => {
+    localStorage.setItem('user', JSON.stringify({ email }));
+    setShowAuthModal(false);
+  };
+
+  const handleSignup = (email, password, username) => {
+    localStorage.setItem('user', JSON.stringify({ email, username }));
+    setShowAuthModal(false);
+  };
+
   return (
     <Router>
-      <Navbar />
+      <Navbar onLoginClick={handleAuthClick} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-
-        {/* ✅ Protect Admin Route - Only Logged-in Users Can Access */}
-        <Route
-          path="/admin"
-          element={
-            <SignedIn>
-              <ProtectedRoute>
-                <AdminPage />
-              </ProtectedRoute>
-            </SignedIn>
-          }
-        />
-        
-        {/* ✅ Redirect Unauthenticated Users to Sign In */}
-        <Route
-          path="*"
-          element={
-            <SignedOut>
-              <RedirectToSignIn />
-            </SignedOut>
-          }
-        />
       </Routes>
+
+      {showAuthModal && (
+        <AuthModal
+          mode={authMode}
+          onClose={handleCloseAuth}
+          onLogin={handleLogin}
+          onSignup={handleSignup}
+          switchMode={switchAuthMode}
+        />
+      )}
+
       <Footer />
     </Router>
   );

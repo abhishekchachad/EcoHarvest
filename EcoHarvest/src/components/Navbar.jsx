@@ -1,10 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
-import "../styles/index.css";
+import { Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ onLoginClick }) => {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
     <header className="navbar">
       <div className="logo-section">
@@ -12,22 +20,28 @@ const Navbar = () => {
         <span className="logo-text">Eco Harvest</span>
       </div>
 
-      {/* Navigation Links */}
       <nav className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/products">Products</Link>
         <Link to="/about">About Us</Link>
         <Link to="/contact">Contact Us</Link>
-        <Link to="/admin" className="admin-link">Admin Panel</Link>
+        <Link to="/Admin">Admin</Link>
       </nav>
 
-      {/* Authentication & Cart */}
       <div className="navbar-icons">
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
         </Link>
-        <SignedOut><SignInButton /></SignedOut>
-        <SignedIn><UserButton /></SignedIn>
+        {!user ? (
+          <Button color="primary" onClick={onLoginClick}>
+            Login
+          </Button>
+        ) : (
+          <div>
+            <span>{user.username}</span>
+            <Button color="danger" onClick={handleLogout}>Logout</Button>
+          </div>
+        )}
       </div>
     </header>
   );
