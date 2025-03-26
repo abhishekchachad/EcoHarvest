@@ -1,116 +1,98 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import "../styles/index.css"; // Ensure custom styles are applied
+import "../styles/index.css";
+import { FaEnvelope, FaPaperPlane } from "react-icons/fa";
 
 const ContactUs = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [newsTitle, setNewsTitle] = useState("");
-  const [newsContent, setNewsContent] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/api/messages", { email, message });
       setSuccess(true);
+      setError("");
       setEmail("");
       setMessage("");
-      setError("");
-    } catch (error) {
-      setError("There was an error sending your message. Please try again.");
-      console.error("Error sending message:", error);
-    }
-  };
-
-  const handleNewsSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/api/news", { title: newsTitle, content: newsContent });
-      setNewsTitle("");
-      setNewsContent("");
-      alert("News posted successfully!");
-    } catch (error) {
-      alert("There was an error posting the news.");
-      console.error("Error posting news:", error);
+    } catch (err) {
+      console.error("Error submitting message:", err);
+      setError("Something went wrong. Please try again.");
+      setSuccess(false);
     }
   };
 
   return (
-    <div className="contact-page container">
-      {/* Newsletter Section for Admin */}
-      <div className="newsletter-section my-5 p-5 bg-gradient shadow rounded-lg">
-        <h2 className="text-center mb-4">Post Latest News</h2>
-        <form onSubmit={handleNewsSubmit} className="bg-light p-4 border rounded shadow-sm">
-          <div className="mb-4">
-            <label htmlFor="newsTitle" className="form-label fw-bold">News Title</label>
-            <input
-              type="text"
-              className="form-control"
-              id="newsTitle"
-              placeholder="Enter the title of the news"
-              value={newsTitle}
-              onChange={(e) => setNewsTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="newsContent" className="form-label fw-bold">News Content</label>
-            <textarea
-              className="form-control"
-              id="newsContent"
-              rows="5"
-              placeholder="Type the content of the news"
-              value={newsContent}
-              onChange={(e) => setNewsContent(e.target.value)}
-              required
-            />
-          </div>
-          <div className="d-flex justify-content-center">
-            <button type="submit" className="btn btn-success w-50 fw-bold">Post News</button>
-          </div>
-        </form>
+    <div className="container mt-5 contact-page">
+      <div className="mb-5">
+        <h1 className="text-center fw-bold mb-4">Get in Touch with EcoHarvest 🌿</h1>
+        <p className="text-center lead">
+          We're passionate about connecting with our community. Whether you're a customer with feedback,
+          a farmer with a new idea, or just curious about what we do — we'd love to hear from you!
+        </p>
+        <p className="text-center">
+          At <strong>EcoHarvest</strong>, we believe that communication drives innovation.
+          Every message you send helps us grow greener, better, and more connected.
+        </p>
+        <p className="text-center">
+          🌍 Let’s work together toward a future of sustainable farming, clean produce, and ethical trade.
+        </p>
       </div>
 
-      {/* Contact Us Section */}
-      <div className="contact-container mt-5">
-        <h1 className="text-center">Contact EcoHarvest - Your Trusted Organic Farming Partner</h1>
-        <p className="text-center loyalty-text mt-3">
-          "At EcoHarvest, we value our customers and their commitment to <strong>sustainable agriculture</strong>. Get in touch with us today for <strong>eco-friendly farming solutions</strong> and <strong>organic farming tools</strong>! 🌱💚"
+      <div className="card shadow p-4">
+        <h2 className="text-center mb-4">📬 Send Us a Message</h2>
+        <p className="text-center loyalty-text mb-4">
+          Whether it’s a question, a comment, or a suggestion — we’re here to help.
         </p>
-        <form className="contact-form mt-4" onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="email" className="form-label">Your Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="Enter your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label fw-bold">Email address</label>
+            <div className="input-group">
+              <span className="input-group-text"><FaEnvelope /></span>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
           </div>
+
           <div className="mb-4">
-            <label htmlFor="message" className="form-label">Your Message</label>
+            <label className="form-label fw-bold">Your Message</label>
             <textarea
               className="form-control"
-              id="message"
-              placeholder="Type your message here"
+              rows="4"
+              placeholder="Type your message here..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
             ></textarea>
           </div>
-          <div className="d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary w-50">Send Message</button>
+
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary w-50">
+              <FaPaperPlane className="me-2" />
+              Send Message
+            </button>
           </div>
+
+          {success && (
+            <p className="text-success text-center mt-4">
+              ✅ Thank you! Your message was sent successfully.
+            </p>
+          )}
+          {error && (
+            <p className="text-danger text-center mt-4">
+              ❌ {error}
+            </p>
+          )}
         </form>
-        {success && <p className="success-message text-success text-center mt-4">✅ Your message has been sent! We will get back to you soon.</p>}
-        {error && <p className="error-message text-danger text-center mt-4">{error}</p>}
       </div>
     </div>
   );

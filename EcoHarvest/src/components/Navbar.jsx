@@ -25,7 +25,7 @@ const Navbar = ({ onLoginClick }) => {
         <Link to="/products">Products</Link>
         <Link to="/about">About Us</Link>
         <Link to="/contact">Contact Us</Link>
-        <Link to="/Admin">Admin</Link>
+        <Link to="/admin">Admin</Link>
       </nav>
 
       <div className="navbar-icons">

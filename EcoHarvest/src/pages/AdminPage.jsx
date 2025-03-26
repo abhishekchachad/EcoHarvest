@@ -1,7 +1,7 @@
-// EcoHarvest/src/pages/AdminPage.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../styles/index.css"; 
+import { FaEdit, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
+import "../styles/index.css";
 
 const AdminPage = () => {
     const [products, setProducts] = useState([]);
@@ -18,7 +18,6 @@ const AdminPage = () => {
         fetchProducts();
     }, []);
 
-    // ✅ Fetch All Products
     const fetchProducts = async () => {
         try {
             const response = await axios.get("http://localhost:5000/api/products");
@@ -28,14 +27,12 @@ const AdminPage = () => {
         }
     };
 
-    // ✅ Handle Image Selection
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setImage(file);
         setPreviewImage(URL.createObjectURL(file));
     };
 
-    // ✅ Add or Update Product
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -48,12 +45,10 @@ const AdminPage = () => {
 
         try {
             if (editingId) {
-                // Update Product
                 await axios.put(`http://localhost:5000/api/products/${editingId}`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
             } else {
-                // Add Product
                 await axios.post("http://localhost:5000/api/products", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
@@ -73,7 +68,6 @@ const AdminPage = () => {
         }
     };
 
-    // ✅ Edit Product
     const handleEdit = (product) => {
         setEditingId(product.product_id);
         setName(product.name);
@@ -84,7 +78,6 @@ const AdminPage = () => {
         setPreviewImage(`http://localhost:5000/${product.image_url}`);
     };
 
-    // ✅ Soft Delete Product (Set DeleteFlag = 'Y')
     const handleDelete = async (id) => {
         try {
             await axios.put(`http://localhost:5000/api/products/delete/${id}`);
@@ -96,7 +89,10 @@ const AdminPage = () => {
 
     return (
         <div className="admin-container">
-            <h2>Admin Panel</h2>
+            <h2>
+                <FaPlusCircle style={{ marginRight: "8px" }} />
+                Admin Panel
+            </h2>
 
             {/* ✅ Form for Adding/Updating Products */}
             <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -106,7 +102,10 @@ const AdminPage = () => {
                 <input type="number" placeholder="Stock Quantity" value={stockQuantity} onChange={(e) => setStockQuantity(e.target.value)} required />
                 <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
                 <input type="file" accept="image/*" onChange={handleFileChange} />
-                <button type="submit">{editingId ? "Update Product" : "Add Product"}</button>
+                <button type="submit">
+                    <FaPlusCircle style={{ marginRight: "6px" }} />
+                    {editingId ? "Update Product" : "Add Product"}
+                </button>
             </form>
 
             {/* ✅ Table to Display Products */}
@@ -136,8 +135,14 @@ const AdminPage = () => {
                             <td>{product.stock_quantity}</td>
                             <td>{product.category}</td>
                             <td>
-                                <button className="edit-btn" onClick={() => handleEdit(product)}>Edit</button>
-                                <button className="delete-btn" onClick={() => handleDelete(product.product_id)}>Delete</button>
+                                <button className="edit-btn" onClick={() => handleEdit(product)}>
+                                    <FaEdit style={{ marginRight: "4px" }} />
+                                    Edit
+                                </button>
+                                <button className="delete-btn" onClick={() => handleDelete(product.product_id)}>
+                                    <FaTrashAlt style={{ marginRight: "4px" }} />
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}

@@ -6,6 +6,7 @@ import HomePage from "./pages/Home";
 import Products from "./pages/Products";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
+import AdminPage from "./pages/AdminPage";
 import AuthModal from "./pages/AuthModal"; // New combined modal
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/global.css";
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
 
       {showAuthModal && (
