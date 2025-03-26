@@ -8,11 +8,31 @@ const HomePage = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState("login"); // 'login' or 'signup'
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null); // Store user details from JWT
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    setIsLoggedIn(!!user);
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      console.log("Stored Token:", storedToken);  // Log the token
+      setIsLoggedIn(true);
+      const decodedUser = decodeToken(storedToken);
+      console.log("Decoded User:", decodedUser);  // Log the decoded user data
+      setUser(decodedUser);
+    }
   }, []);
+
+  const decodeToken = (token) => {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const decodedData = JSON.parse(atob(base64));
+      console.log("Decoded Token Data:", decodedData);  // Log the decoded token data
+      return decodedData;
+    } catch (error) {
+      console.error("Invalid token", error);
+      return null;
+    }
+  };
 
   const handleShopClick = () => {
     if (isLoggedIn) {
@@ -25,22 +45,67 @@ const HomePage = () => {
     }
   };
 
-  const handleLogin = (email, password) => {
-    console.log("Logging in with:", email);
-    localStorage.setItem("user", JSON.stringify({ email }));
-    setIsLoggedIn(true);
-    setShowAuthModal(false);
+  const handleLogin = async (email, password) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // On successful login, store the token in localStorage
+        localStorage.setItem("token", data.token);
+        setIsLoggedIn(true);
+        const decodedUser = decodeToken(data.token);
+        setUser(decodedUser);
+        setShowAuthModal(false);
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert("An error occurred while logging in");
+    }
   };
 
-  const handleSignup = (email, password, username) => {
-    console.log("Signing up with:", username, email);
-    localStorage.setItem("user", JSON.stringify({ email, username }));
-    setIsLoggedIn(true);
-    setShowAuthModal(false);
+  const handleSignup = async (email, password, username) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, username, role: "customer" }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Account created successfully!");
+        setAuthMode("login"); // Switch to login mode after signup
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error signing up:", error);
+      alert("An error occurred while signing up");
+    }
   };
 
   const switchAuthMode = () => {
     setAuthMode(authMode === "login" ? "signup" : "login");
+  };
+
+  const handleLogout = () => {
+    // Clear the token and user data from localStorage
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setUser(null);
   };
 
   return (
@@ -50,25 +115,32 @@ const HomePage = () => {
         <div className="hero-text">
           <h1>EcoHarvest - Your Destination for Organic & Sustainable Farming</h1>
           <p>
-            Welcome to EcoHarvest, where we believe in organic farming, sustainable agriculture, 
-            and delivering eco-friendly products to promote a healthier planet. 
-            Our mission is to empower farmers and consumers with farm-to-table food, 
-            non-GMO seeds, and chemical-free farming solutions that nurture both people and the environment.
+            Welcome to EcoHarvest, where we believe in organic farming, sustainable agriculture,
+            and delivering eco-friendly products to promote a healthier planet. Our mission is to
+            empower farmers and consumers with farm-to-table food, non-GMO seeds, and chemical-free
+            farming solutions that nurture both people and the environment.
           </p>
-          <button 
-            className="shop-button" 
-            onClick={handleShopClick} // Added onClick handler
-          >
+          <button className="shop-button" onClick={handleShopClick}>
             Shop Organic Products
           </button>
         </div>
         <div className="hero-image">
-          <img 
-            src="https://storage.googleapis.com/a1aa/image/eenVLYXvS0d3UrCiBv4rztdSofkT7hI_PeqbUtfBABI.jpg" 
-            alt="A basket of fresh organic produce" 
+          <img
+            src="https://storage.googleapis.com/a1aa/image/eenVLYXvS0d3UrCiBv4rztdSofkT7hI_PeqbUtfBABI.jpg"
+            alt="A basket of fresh organic produce"
           />
         </div>
       </main>
+
+      {/* User Info Section */}
+      {isLoggedIn && user && (
+        <div className="user-info">
+          <p>Welcome, {user.username}</p>
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      )}
 
       {/* Combined Auth Modal */}
       {showAuthModal && (

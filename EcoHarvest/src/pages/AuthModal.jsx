@@ -16,6 +16,7 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
     role: 'customer' // Default to customer role
   });
   const [errors, setErrors] = useState({});
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,26 +57,64 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
 
-    if (mode === 'login') {
-      onLogin(formData.email, formData.password);
-    } else {
-      onSignup(formData.email, formData.password, formData.username, formData.role);
+    try {
+      if (mode === 'login') {
+        // Make API call to login
+        const response = await fetch('http://localhost:5000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: formData.email, password: formData.password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem("token", data.token);
+          onLogin(data.token);
+          onClose();
+        } else {
+          setError(data.message);
+        }
+      } else {
+        // Make API call to signup
+        const response = await fetch('http://localhost:5000/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+            username: formData.username,
+            role: formData.role,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert('Account created successfully!');
+          setError('');
+          switchMode(); // Switch to login mode
+        } else {
+          setError(data.message);
+        }
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setError('An error occurred during the process.');
     }
   };
 
   return (
     <Modal show={true} onHide={onClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>
-          {mode === 'login' ? 'Login to Your Account' : 'Create New Account'}
-        </Modal.Title>
+        <Modal.Title>{mode === 'login' ? 'Login to Your Account' : 'Create New Account'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -92,18 +131,12 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
                   isInvalid={!!errors.username}
                   required
                 />
-                <Form.Control.Feedback type="invalid">
-                  {errors.username}
-                </Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>
               </Form.Group>
               
               <Form.Group className="mb-3">
                 <Form.Label>Account Type</Form.Label>
-                <Form.Select
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                >
+                <Form.Select name="role" value={formData.role} onChange={handleChange}>
                   {ALLOWED_ROLES.map(role => (
                     <option key={role.value} value={role.value}>
                       {role.label}
@@ -125,9 +158,7 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
               isInvalid={!!errors.email}
               required
             />
-            <Form.Control.Feedback type="invalid">
-              {errors.email}
-            </Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -141,17 +172,12 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
               isInvalid={!!errors.password}
               required
             />
-            <Form.Control.Feedback type="invalid">
-              {errors.password}
-            </Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
           </Form.Group>
 
-          <Button 
-            variant="primary" 
-            type="submit" 
-            className="w-100 mb-3"
-            size="lg"
-          >
+          {error && <p className="text-danger">{error}</p>}
+
+          <Button variant="primary" type="submit" className="w-100 mb-3" size="lg">
             {mode === 'login' ? 'Login' : 'Sign Up'}
           </Button>
 
@@ -159,22 +185,14 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
             {mode === 'login' ? (
               <p className="text-muted">
                 Don't have an account?{' '}
-                <Button 
-                  variant="link" 
-                  onClick={switchMode}
-                  className="p-0 align-baseline"
-                >
+                <Button variant="link" onClick={switchMode} className="p-0 align-baseline">
                   Sign up now
                 </Button>
               </p>
             ) : (
               <p className="text-muted">
                 Already have an account?{' '}
-                <Button 
-                  variant="link" 
-                  onClick={switchMode}
-                  className="p-0 align-baseline"
-                >
+                <Button variant="link" onClick={switchMode} className="p-0 align-baseline">
                   Login here
                 </Button>
               </p>
