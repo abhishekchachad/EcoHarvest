@@ -7,13 +7,15 @@ import Products from "./pages/Products";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import AdminPage from "./pages/AdminPage";
-import AuthModal from "./pages/AuthModal"; // New combined modal
+import CartPage from "./pages/CartPage"; // ✅ Cart Page
+import AuthModal from "./pages/AuthModal"; // ✅ Combined Auth Modal
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/global.css";
 
 const App = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authMode, setAuthMode] = useState("login"); // 'login' or 'signup'
+  const [authMode, setAuthMode] = useState("login");
 
   const handleAuthClick = () => {
     setAuthMode("login");
@@ -29,24 +31,26 @@ const App = () => {
   };
 
   const handleLogin = (email, password) => {
-    localStorage.setItem('user', JSON.stringify({ email }));
+    localStorage.setItem("user", JSON.stringify({ email }));
     setShowAuthModal(false);
   };
 
   const handleSignup = (email, password, username) => {
-    localStorage.setItem('user', JSON.stringify({ email, username }));
+    localStorage.setItem("user", JSON.stringify({ email, username }));
     setShowAuthModal(false);
   };
 
   return (
     <Router>
       <Navbar onLoginClick={handleAuthClick} />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/contact" element={<ContactUs />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/cart" element={<CartPage />} /> {/* ✅ Route works now */}
       </Routes>
 
       {showAuthModal && (

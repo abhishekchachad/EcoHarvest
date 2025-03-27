@@ -5,109 +5,112 @@ const fs = require("fs");
 
 // 📂 Configure Multer for Local Image Uploads
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadDir = path.join(__dirname, "../public/uploads");
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-        }
-        cb(null, uploadDir);
-    },
-
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_${file.originalname}`);
-    },
+  destination: (req, file, cb) => {
+    const uploadDir = path.join(__dirname, "../public/uploads");
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  }
 });
 
 const upload = multer({ storage: storage });
 
 // ✅ Fetch All Products (Exclude Soft Deleted)
 const getProducts = async (req, res) => {
-    try {
-        const pool = await poolPromise;
-        const result = await pool.request().query("SELECT * FROM dbo.Products WHERE DeleteFlag = 'N'");
-        res.json(result.recordset);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query("SELECT * FROM dbo.Products WHERE DeleteFlag = 'N'");
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 // ✅ Add Product
 const addProduct = async (req, res) => {
-    const { name, price, description, stock_quantity, category } = req.body;
-    const imageUrl = req.file ? `uploads/${req.file.filename}` : null;
+  const { name, price, description, stock_quantity, category } = req.body;
+  const imageUrl = req.file ? `uploads/${req.file.filename}` : null;
 
-    try {
-        const pool = await poolPromise;
-        await pool.request()
-            .input("name", sql.NVarChar, name)
-            .input("price", sql.Decimal, price)
-            .input("description", sql.NVarChar, description)
-            .input("stock_quantity", sql.Int, stock_quantity)
-            .input("category", sql.NVarChar, category)
-            .input("image_url", sql.NVarChar, imageUrl)
-            .input("DeleteFlag", sql.NVarChar, "N")
-            .query(`INSERT INTO dbo.Products (name, price, description, stock_quantity, category, image_url, DeleteFlag)
-                    VALUES (@name, @price, @description, @stock_quantity, @category, @image_url, @DeleteFlag)`);
+  try {
+    const pool = await poolPromise;
+    await pool.request()
+      .input("name", sql.NVarChar, name)
+      .input("price", sql.Decimal(10, 2), price)
+      .input("description", sql.NVarChar, description)
+      .input("stock_quantity", sql.Int, stock_quantity)
+      .input("category", sql.NVarChar, category)
+      .input("image_url", sql.NVarChar, imageUrl)
+      .input("DeleteFlag", sql.NVarChar, "N")
+      .query(`
+        INSERT INTO dbo.Products (name, price, description, stock_quantity, category, image_url, DeleteFlag)
+        VALUES (@name, @price, @description, @stock_quantity, @category, @image_url, @DeleteFlag)
+      `);
 
-        res.json({ message: "✅ Product added successfully!" });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    res.json({ message: "✅ Product added successfully!" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 // ✅ Update Product
 const updateProduct = async (req, res) => {
-    const { name, price, description, stock_quantity, category } = req.body;
-    const product_id = req.params.id;
-    const newImageUrl = req.file ? `uploads/${req.file.filename}` : null; // Get new image if uploaded
+  const { name, price, description, stock_quantity, category } = req.body;
+  const product_id = req.params.id;
+  const newImageUrl = req.file ? `uploads/${req.file.filename}` : null;
 
-    try {
-        const pool = await poolPromise;
+  try {
+    const pool = await poolPromise;
 
-        // ✅ Fetch the current image URL from the database
-        const existingProduct = await pool.request()
-            .input("id", sql.Int, product_id)
-            .query("SELECT image_url FROM dbo.Products WHERE product_id = @id");
+    const existingProduct = await pool.request()
+      .input("id", sql.Int, product_id)
+      .query("SELECT image_url FROM dbo.Products WHERE product_id = @id");
 
-        let finalImageUrl = existingProduct.recordset[0]?.image_url; // Default: Keep old image
-        if (newImageUrl) finalImageUrl = newImageUrl; // Replace only if a new image is uploaded
+    let finalImageUrl = existingProduct.recordset[0]?.image_url;
+    if (newImageUrl) finalImageUrl = newImageUrl;
 
-        // ✅ Update the product with either new or existing image URL
-        await pool.request()
-            .input("name", sql.NVarChar, name)
-            .input("price", sql.Decimal, price)
-            .input("description", sql.NVarChar, description)
-            .input("stock_quantity", sql.Int, stock_quantity)
-            .input("category", sql.NVarChar, category)
-            .input("image_url", sql.NVarChar, finalImageUrl)
-            .input("id", sql.Int, product_id)
-            .query(`
-                UPDATE dbo.Products 
-                SET name = @name, price = @price, description = @description, 
-                    stock_quantity = @stock_quantity, category = @category, 
-                    image_url = @image_url
-                WHERE product_id = @id
-            `);
+    await pool.request()
+      .input("name", sql.NVarChar, name)
+      .input("price", sql.Decimal(10, 2), price)
+      .input("description", sql.NVarChar, description)
+      .input("stock_quantity", sql.Int, stock_quantity)
+      .input("category", sql.NVarChar, category)
+      .input("image_url", sql.NVarChar, finalImageUrl)
+      .input("id", sql.Int, product_id)
+      .query(`
+        UPDATE dbo.Products
+        SET name = @name, price = @price, description = @description,
+            stock_quantity = @stock_quantity, category = @category, image_url = @image_url
+        WHERE product_id = @id
+      `);
 
-        res.json({ message: "✅ Product updated successfully!" });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    res.json({ message: "✅ Product updated successfully!" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-
-// ✅ Soft Delete Product
+// ✅ Soft Delete
 const softDeleteProduct = async (req, res) => {
-    try {
-        const pool = await poolPromise;
-        await pool.request()
-            .input("id", sql.Int, req.params.id)
-            .query("UPDATE dbo.Products SET DeleteFlag = 'Y' WHERE product_id = @id");
+  try {
+    const pool = await poolPromise;
+    await pool.request()
+      .input("id", sql.Int, req.params.id)
+      .query("UPDATE dbo.Products SET DeleteFlag = 'Y' WHERE product_id = @id");
 
-        res.json({ message: "✅ Product marked as deleted (soft delete)" });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    res.json({ message: "✅ Product marked as deleted (soft delete)" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-module.exports = { getProducts, addProduct, updateProduct, softDeleteProduct, upload };
+module.exports = {
+  getProducts,
+  addProduct,
+  updateProduct,
+  softDeleteProduct,
+  upload
+};

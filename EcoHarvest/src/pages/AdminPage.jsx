@@ -89,65 +89,106 @@ const AdminPage = () => {
 
     return (
         <div className="admin-container">
-            <h2>
+            <h2 style={{ marginBottom: "20px" }}>
                 <FaPlusCircle style={{ marginRight: "8px" }} />
                 Admin Panel
             </h2>
 
             {/* ✅ Form for Adding/Updating Products */}
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
+            <form
+                onSubmit={handleSubmit}
+                encType="multipart/form-data"
+                style={{ marginBottom: "30px", display: "grid", gap: "12px", maxWidth: "600px" }}
+            >
                 <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
                 <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required />
                 <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
                 <input type="number" placeholder="Stock Quantity" value={stockQuantity} onChange={(e) => setStockQuantity(e.target.value)} required />
                 <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
                 <input type="file" accept="image/*" onChange={handleFileChange} />
-                <button type="submit">
+                <button type="submit" style={{ padding: "10px", fontSize: "16px" }}>
                     <FaPlusCircle style={{ marginRight: "6px" }} />
                     {editingId ? "Update Product" : "Add Product"}
                 </button>
             </form>
 
             {/* ✅ Table to Display Products */}
-            <table className="admin-table">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Stock</th>
-                        <th>Category</th>
-                        <th>Actions</th>
-                    </tr>
+            <div style={{ overflowX: "auto" }}>
+            <table className="admin-table" style={{
+                width: "100%",
+                borderCollapse: "separate",
+                borderSpacing: "0 10px",
+                fontSize: "15px"
+            }}>
+                <thead style={{ backgroundColor: "#f2f2f2" }}>
+                <tr>
+                    <th style={{ padding: "12px", textAlign: "left" }}>Image</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Stock</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {products.map((product) => (
-                        <tr key={product.product_id}>
-                            <td>
-                                <img src={`http://localhost:5000/${product.image_url}`} alt={product.name} className="product-image" />
-                            </td>
-                            <td>{product.product_id}</td>
-                            <td>{product.name}</td>
-                            <td>${product.price}</td>
-                            <td>{product.description}</td>
-                            <td>{product.stock_quantity}</td>
-                            <td>{product.category}</td>
-                            <td>
-                                <button className="edit-btn" onClick={() => handleEdit(product)}>
-                                    <FaEdit style={{ marginRight: "4px" }} />
-                                    Edit
-                                </button>
-                                <button className="delete-btn" onClick={() => handleDelete(product.product_id)}>
-                                    <FaTrashAlt style={{ marginRight: "4px" }} />
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                {products.map((product) => (
+                    <tr key={product.product_id} style={{
+                    backgroundColor: "#fff",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+                    borderRadius: "8px"
+                    }}>
+                    <td style={{ padding: "10px" }}>
+                        <img
+                        src={`http://localhost:5000/${product.image_url}`}
+                        alt={product.name}
+                        className="product-image"
+                        style={{
+                            width: "60px",
+                            height: "60px",
+                            borderRadius: "6px",
+                            objectFit: "cover"
+                        }}
+                        />
+                    </td>
+                    <td>{product.product_id}</td>
+                    <td>{product.name}</td>
+                    <td>${product.price}</td>
+                    <td style={{ maxWidth: "180px" }}>{product.description}</td>
+                    <td>{product.stock_quantity}</td>
+                    <td>{product.category}</td>
+                    <td>
+                        <button
+                        className="edit-btn"
+                        onClick={() => handleEdit(product)}
+                        style={{
+                            marginRight: "6px",
+                            padding: "6px 10px",
+                            borderRadius: "4px"
+                        }}
+                        >
+                        <FaEdit style={{ marginRight: "4px" }} />
+                        Edit
+                        </button>
+                        <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(product.product_id)}
+                        style={{
+                            padding: "6px 10px",
+                            borderRadius: "4px"
+                        }}
+                        >
+                        <FaTrashAlt style={{ marginRight: "4px" }} />
+                        Delete
+                        </button>
+                    </td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
+            </div>
+
         </div>
     );
 };
