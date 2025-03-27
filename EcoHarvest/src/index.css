@@ -302,3 +302,10 @@ body {
     padding: 8px;
   }
 }
+.welcome-message {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #4CAF50;
+}

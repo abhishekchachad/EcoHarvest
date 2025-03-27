@@ -6,11 +6,35 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ onLoginClick }) => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+
+  // Retrieve the token from localStorage and decode it to extract user information
+  const token = localStorage.getItem("token");
+
+  let username = null;
+
+  // Function to decode JWT token
+  const decodeToken = (token) => {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const decodedData = JSON.parse(atob(base64));
+      return decodedData;
+    } catch (error) {
+      console.error("Invalid token", error);
+      return null;
+    }
+  };
+
+  if (token) {
+    // Decode the JWT token to extract user info
+    const decodedToken = decodeToken(token);
+    username = decodedToken ? decodedToken.username : null;
+  }
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    navigate('/');
+    // Clear the token from localStorage
+    localStorage.removeItem("token");
+    navigate('/');  // Redirect to home after logout
   };
 
   return (
@@ -32,13 +56,14 @@ const Navbar = ({ onLoginClick }) => {
         <Link to="/cart" className="cart-link">
           <FaShoppingCart className="cart-icon" />
         </Link>
-        {!user ? (
+
+        {!username ? (
           <Button color="primary" onClick={onLoginClick}>
             Login
           </Button>
         ) : (
           <div>
-            <span>{user.username}</span>
+            <span className="welcome-message">Welcome, {username}</span>
             <Button color="danger" onClick={handleLogout}>Logout</Button>
           </div>
         )}

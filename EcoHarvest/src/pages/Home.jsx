@@ -131,17 +131,7 @@ const HomePage = () => {
           />
         </div>
       </main>
-
-      {/* User Info Section */}
-      {isLoggedIn && user && (
-        <div className="user-info">
-          <p>Welcome, {user.username}</p>
-          <button className="logout-button" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      )}
-
+  
       {/* Combined Auth Modal */}
       {showAuthModal && (
         <AuthModal
