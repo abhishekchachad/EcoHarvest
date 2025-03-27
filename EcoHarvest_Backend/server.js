@@ -31,12 +31,11 @@ const jwt = require("jsonwebtoken");
 const { poolPromise } = require("./config/dbConfig"); // Import the poolPromise from your dbconfig
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-<<<<<<< Updated upstream
+
 const productRoutes = require("./routes/productRoutes");
-=======
+
 const productRoutes = require("./routes/productRoutes"); // Ensure correct path
 const messageRoutes = require("./routes/messageRoutes");
->>>>>>> Stashed changes
 
 const app = express();
 
@@ -48,7 +47,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 
-<<<<<<< Updated upstream
+
 // Signup Route
 app.post("/api/signup", async (req, res) => {
   const { email, password, username, role = 'customer' } = req.body; // Default role is 'customer'
@@ -126,9 +125,11 @@ app.post("/api/login", async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-=======
+
 app.use("/api/messages", messageRoutes);
->>>>>>> Stashed changes
+
+app.use("/api/messages", messageRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
