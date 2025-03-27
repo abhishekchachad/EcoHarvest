@@ -2,3 +2,4 @@ EcoHarvest_Backend/.env
 EcoHarvest_Backend/config/dbConfig.js
 EcoHarvest_Backend/package.json
 /node_modules
+/EcoHarvest_Backend/public/uploads
