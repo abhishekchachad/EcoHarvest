@@ -7,8 +7,9 @@ import Products from "./pages/Products";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import AdminPage from "./pages/AdminPage";
-import CartPage from "./pages/CartPage"; // ✅ Cart Page
-import AuthModal from "./pages/AuthModal"; // ✅ Combined Auth Modal
+import CheckoutPage from "./pages/CheckoutPage";
+import CartPage from "./pages/CartPage"; 
+import AuthModal from "./pages/AuthModal";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/global.css";
@@ -50,7 +51,8 @@ const App = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/admin" element={<AdminPage />} />
-        <Route path="/cart" element={<CartPage />} /> {/* ✅ Route works now */}
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
 
       {showAuthModal && (
