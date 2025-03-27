@@ -13,11 +13,24 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
+    cb(null, `${file.originalname}`);
   }
 });
 
 const upload = multer({ storage: storage });
+
+const testConnection = async () => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query('SELECT 1');
+    console.log('Database connected successfully');
+  } catch (err) {
+    console.error('Database connection failed:', err);
+  }
+};
+
+testConnection();
+
 
 // ✅ Fetch All Products (Exclude Soft Deleted)
 const getProducts = async (req, res) => {

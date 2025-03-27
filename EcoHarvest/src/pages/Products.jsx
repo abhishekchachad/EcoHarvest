@@ -10,7 +10,8 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
+        console.log("Fetched Products:", response.data);  // Log the response
         setProducts(response.data);
         setLoading(false);
       } catch (err) {
