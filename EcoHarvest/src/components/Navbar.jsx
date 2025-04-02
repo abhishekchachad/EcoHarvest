@@ -40,16 +40,16 @@ const Navbar = ({ onLoginClick }) => {
   return (
     <header className="navbar">
       <div className="logo-section">
-        <img src="/logo.jpeg" alt="Eco-Harvest-Logo" className="site-logo" />
-        <span className="logo-text">Eco Harvest</span>
+        <img src="/logo.jpeg" alt="Eco-Harvest-Logo" onClick={() => navigate('/')} className="site-logo" />
+        <span className="logo-text"onClick={() => navigate('/')}>Eco Harvest</span>
       </div>
 
       <nav className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/products">Products</Link>
-        <Link to="/about">About Us</Link>
-        <Link to="/contact">Contact Us</Link>
-        <Link to="/admin">Admin</Link>
+        <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link>
+        <Link to="/products" className={location.pathname === '/products' ? 'active' : ''}>Products</Link>
+        <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About Us</Link>
+        <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''}>Contact Us</Link>
+        <Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>Admin</Link>
       </nav>
 
       <div className="navbar-icons">
@@ -64,7 +64,7 @@ const Navbar = ({ onLoginClick }) => {
         ) : (
           <div>
             <span className="welcome-message">Welcome, {username}</span>
-            <Button color="danger" onClick={handleLogout}>Logout</Button>
+            <Button color="danger" className="btnlogout" onClick={handleLogout}>Logout</Button>
           </div>
         )}
       </div>
