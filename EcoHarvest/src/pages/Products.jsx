@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/index.css";
 import { useNavigate } from "react-router-dom";
+import { FaArrowUp } from "react-icons/fa";
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -48,6 +50,20 @@ const Products = () => {
       console.error("Error adding to cart:", error);
       alert("Failed to add product to cart.");
     }
+  };
+
+  const [showTopBtn, setShowTopBtn] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowTopBtn(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -113,7 +129,7 @@ const Products = () => {
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e0e0e0")}
               >
                 View Product
-              </button>              
+              </button>
               <button
                 onClick={() => addToCart(product)}
                 style={{
@@ -137,6 +153,29 @@ const Products = () => {
           ))}
         </div>
       )}
+      {showTopBtn && (
+        <button
+          onClick={scrollToTop}
+          style={{
+            position: "fixed",
+            bottom: "50px",
+            right: "40px",
+            padding: "20px",
+            borderRadius: "50%",
+            backgroundColor: "#4CAF50",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.7)",
+            zIndex: 1000,
+            transition: "opacity 0.8s ease",
+          }}
+          title="Back to Top"
+        >
+          <FaArrowUp />
+        </button>
+      )}
+
     </div>
   );
 };
