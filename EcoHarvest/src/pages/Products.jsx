@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/index.css";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -92,6 +95,25 @@ const Products = () => {
               <p><strong>Category:</strong> {product.category}</p>
               <p><strong>Stock:</strong> {product.stock_quantity}</p>
               <p><strong>Price:</strong> <span style={{ color: "#2e7d32", fontWeight: "bold" }}>${product.price}</span></p>
+              <button
+                onClick={() => navigate(`/products/${product.product_id}`)}
+                style={{
+                  marginTop: "10px",
+                  padding: "10px",
+                  width: "100%",
+                  backgroundColor: "#e0e0e0",
+                  color: "#333",
+                  border: "none",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  transition: "background-color 0.3s ease"
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#d5d5d5")}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#e0e0e0")}
+              >
+                View Product
+              </button>              
               <button
                 onClick={() => addToCart(product)}
                 style={{

@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/Home";
 import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import AdminPage from "./pages/AdminPage";
@@ -53,6 +54,7 @@ const App = () => {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/products/:product_id" element={<ProductDetail />} />
       </Routes>
 
       {showAuthModal && (
