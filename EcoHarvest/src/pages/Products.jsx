@@ -15,7 +15,8 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
+        // const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
+        const response = await axios.get("ecoharvestbackend.vercel.app/api/products");  // Correct backend URL
         console.log("Fetched Products:", response.data);  // Log the response
         setProducts(response.data);
         setLoading(false);
@@ -39,7 +40,7 @@ const Products = () => {
       const decoded = JSON.parse(atob(base64));
       const userId = decoded.userId;
 
-      await axios.post("http://localhost:5000/api/cart", {
+      await axios.post("ecoharvestbackend.vercel.app/api/cart", {
         userId,
         product_id: product.product_id,
         quantity: 1
@@ -95,7 +96,7 @@ const Products = () => {
               onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
               <img
-                src={`http://localhost:5000/${product.image_url}`}
+                src={`ecoharvestbackend.vercel.app/${product.image_url}`}
                 alt={product.name}
                 className="product-image"
                 style={{

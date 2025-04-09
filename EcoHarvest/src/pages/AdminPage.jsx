@@ -20,7 +20,7 @@ const AdminPage = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/products");
+            const response = await axios.get("ecoharvestbackend.vercel.app/api/products");
             setProducts(response.data);
         } catch (error) {
             console.error("Error fetching products:", error);
@@ -45,11 +45,11 @@ const AdminPage = () => {
 
         try {
             if (editingId) {
-                await axios.put(`http://localhost:5000/api/products/${editingId}`, formData, {
+                await axios.put(`ecoharvestbackend.vercel.app/api/products/${editingId}`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
             } else {
-                await axios.post("http://localhost:5000/api/products", formData, {
+                await axios.post("ecoharvestbackend.vercel.app/api/products", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
             }
@@ -75,12 +75,12 @@ const AdminPage = () => {
         setDescription(product.description);
         setStockQuantity(product.stock_quantity);
         setCategory(product.category);
-        setPreviewImage(`http://localhost:5000/${product.image_url}`);
+        setPreviewImage(`ecoharvestbackend.vercel.app/${product.image_url}`);
     };
 
     const handleDelete = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/api/products/delete/${id}`);
+            await axios.put(`ecoharvestbackend.vercel.app/api/products/delete/${id}`);
             fetchProducts();
         } catch (error) {
             console.error("Error deleting product:", error);
@@ -141,7 +141,7 @@ const AdminPage = () => {
                     }}>
                     <td style={{ padding: "10px" }}>
                         <img
-                        src={`http://localhost:5000/${product.image_url}`}
+                        src={`ecoharvestbackend.vercel.app/${product.image_url}`}
                         alt={product.name}
                         className="product-image"
                         style={{

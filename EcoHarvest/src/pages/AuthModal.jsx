@@ -67,7 +67,7 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
     try {
       if (mode === 'login') {
         // Make API call to login
-        const response = await fetch('http://localhost:5000/api/login', {
+        const response = await fetch('ecoharvestbackend.vercel.app/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: formData.email, password: formData.password }),
@@ -84,7 +84,7 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
         }
       } else {
         // Make API call to signup
-        const response = await fetch('http://localhost:5000/api/signup', {
+        const response = await fetch('ecoharvestbackend.vercel.app/api/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
