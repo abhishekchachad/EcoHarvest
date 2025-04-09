@@ -13,7 +13,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         console.log("Fetching product with ID:", product_id);
-        const response = await axios.get(`https://ecoharvestbackend-5c9panvp0-abhishekchachads-projects.vercel.app/api/products/${product_id}`);
+        const response = await axios.get(`https://ecoharvest-backend.vercel.app/api/products/${product_id}`);
         setProduct(response.data);
         setLoading(false);
       } catch (err) {
@@ -36,7 +36,7 @@ const ProductDetail = () => {
       const decoded = JSON.parse(atob(base64));
       const userId = decoded.userId;
 
-      await axios.post("https://ecoharvestbackend-5c9panvp0-abhishekchachads-projects.vercel.app/api/cart", {
+      await axios.post("https://ecoharvest-backend.vercel.app/api/cart", {
         userId,
         product_id: product.product_id,
         quantity: 1,
@@ -75,7 +75,7 @@ const ProductDetail = () => {
         {/* Left: Product Image */}
         <div style={{ flex: "1 1 350px" }}>
           <img
-            src={`https://ecoharvestbackend-5c9panvp0-abhishekchachads-projects.vercel.app/${product.image_url}`}
+            src={`https://ecoharvest-backend.vercel.app/${product.image_url}`}
             alt={product.name}
             style={{
               width: "100%",
