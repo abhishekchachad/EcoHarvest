@@ -1,5 +1,5 @@
 {
-  "name": "ecoharvest-backend",
+  "name": "ecoharvestbackend",
   "version": "1.0.0",
   "description": "Backend for EcoHarvest using Express and SQL Server",
   "main": "server.js",

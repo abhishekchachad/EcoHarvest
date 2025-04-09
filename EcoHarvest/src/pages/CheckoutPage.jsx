@@ -43,7 +43,7 @@ const CheckoutPage = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get(`https://ecoharvest-backend.vercel.app/api/cart?userId=${userId}`);
+      const response = await axios.get(`https://ecoharvestbackend.vercel.app/api/cart?userId=${userId}`);
       setCart(response.data);
 
       const total = response.data.reduce((sum, item) => {
@@ -58,7 +58,7 @@ const CheckoutPage = () => {
   const clearCart = async () => {
     try {
       for (const item of cart) {
-        await axios.delete(`https://ecoharvest-backend.vercel.app/api/cart/${item.product_id}`, {
+        await axios.delete(`https://ecoharvestbackend.vercel.app/api/cart/${item.product_id}`, {
           data: { userId }
         });
       }
