@@ -13,6 +13,7 @@ require('dotenv').config(); // at the top
 // };
 
 
+console.log('DB_HOST:', process.env.DB_HOST); // Add this line
 
 const sql = require('mssql'); // Use this for Azure SQL Database
 const config = {
