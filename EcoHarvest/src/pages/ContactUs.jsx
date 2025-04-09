@@ -12,7 +12,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://ecoharvestbackend.vercel.app/api/messages", { email, message });
+      await axios.post("https://ecoharvestbackend-o7qka6p27-abhishekchachads-projects.vercel.app/api/messages", { email, message });
       setSuccess(true);
       setError("");
       setEmail("");
