@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://ecoharvestbackend.vercel.app";
 
 const LoginModal = ({ onClose, onLogin }) => {
   const [email, setEmail] = useState('');

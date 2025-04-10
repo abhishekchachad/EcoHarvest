@@ -5,7 +5,7 @@ import "../styles/index.css";
 import AuthModal from "./AuthModal"; // Replace separate modals with combined AuthModal
 
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://ecoharvestbackend.vercel.app";
 
 const HomePage = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);

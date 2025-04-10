@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://ecoharvestbackend.vercel.app";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();

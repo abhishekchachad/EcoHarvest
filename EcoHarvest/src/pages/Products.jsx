@@ -4,7 +4,7 @@ import "../styles/index.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://ecoharvestbackend.vercel.app";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -18,7 +18,7 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         // const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
-        const response = await axios.get(`/api/products`);  // Correct backend URL
+        const response = await axios.get(`${API_URL}/api/products`);  // Correct backend URL
         console.log("Fetched Products:", response.data);  // Log the response
         setProducts(response.data);
         setLoading(false);
