@@ -12,7 +12,7 @@ const Products = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  console.log("API URL:", process.env.REACT_APP_API_URL);
+  console.log("API URL:", "https://ecoharvestbackend.vercel.app");
 
   useEffect(() => {
     const fetchProducts = async () => {

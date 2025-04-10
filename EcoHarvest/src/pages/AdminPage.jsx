@@ -3,7 +3,7 @@ import axios from "axios";
 import { FaEdit, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
 import "../styles/index.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://ecoharvestbackend.vercel.app";
 
 const AdminPage = () => {
     const [products, setProducts] = useState([]);
@@ -82,7 +82,7 @@ const AdminPage = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.put(`${API_URL}api/products/delete/${id}`);
+            await axios.put(`${API_URL}/api/products/delete/${id}`);
             fetchProducts();
         } catch (error) {
             console.error("Error deleting product:", error);
