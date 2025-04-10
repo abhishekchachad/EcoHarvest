@@ -3,7 +3,7 @@
 export function middleware(req) {
     const res = new Response(null, {
       headers: {
-        'Access-Control-Allow-Origin': '*', // Or specify your frontend domain
+        'Access-Control-Allow-Origin': 'ecoharvest-nine.vercel.app', // Or specify your frontend domain
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type',
       },
