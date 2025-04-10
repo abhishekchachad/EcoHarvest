@@ -4,6 +4,7 @@ import "../styles/index.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 
+const API_URL = process.env.REACT_APP_API_URL;
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         // const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
-        const response = await axios.get("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/products");  // Correct backend URL
+        const response = await axios.get(`${API_URL}/api/products`);  // Correct backend URL
         console.log("Fetched Products:", response.data);  // Log the response
         setProducts(response.data);
         setLoading(false);
@@ -40,7 +41,7 @@ const Products = () => {
       const decoded = JSON.parse(atob(base64));
       const userId = decoded.userId;
 
-      await axios.post("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart", {
+      await axios.post(`${API_URL}/api/cart`, {
         userId,
         product_id: product.product_id,
         quantity: 1
@@ -96,7 +97,7 @@ const Products = () => {
               onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
               <img
-                src={`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/${product.image_url}`}
+                src={`${API_URL}/${product.image_url}`}
                 alt={product.name}
                 className="product-image"
                 style={{

@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../styles/index.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ProductDetail = () => {
   const { product_id } = useParams();
   const [product, setProduct] = useState(null);
@@ -36,7 +38,7 @@ const ProductDetail = () => {
       const decoded = JSON.parse(atob(base64));
       const userId = decoded.userId;
 
-      await axios.post("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart", {
+      await axios.post(`${API_URL}/api/cart`, {
         userId,
         product_id: product.product_id,
         quantity: 1,

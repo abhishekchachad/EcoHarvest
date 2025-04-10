@@ -3,6 +3,8 @@ import axios from "axios";
 import "../styles/index.css";
 import { FaEnvelope, FaPaperPlane } from "react-icons/fa";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ContactUs = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -12,7 +14,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/messages", { email, message });
+      await axios.post(`${API_URL}/api/messages`, { email, message });
       setSuccess(true);
       setError("");
       setEmail("");

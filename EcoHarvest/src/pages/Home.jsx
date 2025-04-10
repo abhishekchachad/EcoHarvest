@@ -4,6 +4,9 @@ import Footer from "../components/Footer";
 import "../styles/index.css";
 import AuthModal from "./AuthModal"; // Replace separate modals with combined AuthModal
 
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 const HomePage = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState("login"); // 'login' or 'signup'
@@ -47,7 +50,7 @@ const HomePage = () => {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/login", {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +78,7 @@ const HomePage = () => {
 
   const handleSignup = async (email, password, username) => {
     try {
-      const response = await fetch("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/signup", {
+      const response = await fetch(`${API_URL}/api/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
