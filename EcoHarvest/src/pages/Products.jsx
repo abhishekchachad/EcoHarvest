@@ -18,7 +18,7 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         // const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
-        const response = await axios.get(`https://ecoharvestbackend.vercel.app/api/products`);  // Correct backend URL
+        const response = await axios.get(`/api/products`);  // Correct backend URL
         console.log("Fetched Products:", response.data);  // Log the response
         setProducts(response.data);
         setLoading(false);
