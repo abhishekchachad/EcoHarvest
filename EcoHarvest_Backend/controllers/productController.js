@@ -2,6 +2,28 @@ const { sql, poolPromise } = require("../config/dbConfig");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const http = require('http');
+
+http.createServer((req, res) => {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'ecoharvest-nine.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(200);
+    res.end();
+    return;
+  }
+
+  if (req.url === '/api/products' && req.method === 'GET') {
+    // Handle GET request logic here
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: 'This is a CORS-enabled response!' }));
+  }
+
+}).listen(5000, () => console.log('Server running on port 5000'));
+
 
 // 📂 Configure Multer for Local Image Uploads
 const storage = multer.diskStorage({
