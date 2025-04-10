@@ -16,7 +16,7 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         // const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
-        const response = await axios.get("https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/products");  // Correct backend URL
+        const response = await axios.get("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/products");  // Correct backend URL
         console.log("Fetched Products:", response.data);  // Log the response
         setProducts(response.data);
         setLoading(false);
@@ -40,7 +40,7 @@ const Products = () => {
       const decoded = JSON.parse(atob(base64));
       const userId = decoded.userId;
 
-      await axios.post("https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/cart", {
+      await axios.post("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart", {
         userId,
         product_id: product.product_id,
         quantity: 1
@@ -96,7 +96,7 @@ const Products = () => {
               onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
               <img
-                src={`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/${product.image_url}`}
+                src={`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/${product.image_url}`}
                 alt={product.name}
                 className="product-image"
                 style={{

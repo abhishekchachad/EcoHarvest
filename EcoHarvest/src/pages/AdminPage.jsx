@@ -20,7 +20,7 @@ const AdminPage = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get("https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/products");
+            const response = await axios.get("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/products");
             setProducts(response.data);
         } catch (error) {
             console.error("Error fetching products:", error);
@@ -45,11 +45,11 @@ const AdminPage = () => {
 
         try {
             if (editingId) {
-                await axios.put(`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/products/${editingId}`, formData, {
+                await axios.put(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/products/${editingId}`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
             } else {
-                await axios.post("https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/products", formData, {
+                await axios.post("https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/products", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
             }
@@ -75,12 +75,12 @@ const AdminPage = () => {
         setDescription(product.description);
         setStockQuantity(product.stock_quantity);
         setCategory(product.category);
-        setPreviewImage(`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/${product.image_url}`);
+        setPreviewImage(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/${product.image_url}`);
     };
 
     const handleDelete = async (id) => {
         try {
-            await axios.put(`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/products/delete/${id}`);
+            await axios.put(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/products/delete/${id}`);
             fetchProducts();
         } catch (error) {
             console.error("Error deleting product:", error);
@@ -141,7 +141,7 @@ const AdminPage = () => {
                     }}>
                     <td style={{ padding: "10px" }}>
                         <img
-                        src={`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/${product.image_url}`}
+                        src={`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/${product.image_url}`}
                         alt={product.name}
                         className="product-image"
                         style={{
