@@ -6,9 +6,9 @@ export default async function handler(req, res) {
   // res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   // res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
 
   if (req.method === "OPTIONS") {
     res.status(200).end(); // Stop preflight here
