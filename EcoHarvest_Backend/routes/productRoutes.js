@@ -9,6 +9,10 @@ const {
 } = require("../controllers/productController");
 
 const router = express.Router();
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://ecoharvestbackend.vercel.app'
+}));
 
 router.get("/", getProducts);
 router.get("/:product_id", getProductById);
