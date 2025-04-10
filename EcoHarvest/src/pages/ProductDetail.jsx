@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         console.log("Fetching product with ID:", product_id);
-        const response = await axios.get(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/products/${product_id}`);
+        const response = await axios.get(`${API_URL}/api/products/${product_id}`);
         setProduct(response.data);
         setLoading(false);
       } catch (err) {
@@ -77,7 +77,7 @@ const ProductDetail = () => {
         {/* Left: Product Image */}
         <div style={{ flex: "1 1 350px" }}>
           <img
-            src={`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/${product.image_url}`}
+            src={`${API_URL}/${product.image_url}`}
             alt={product.name}
             style={{
               width: "100%",

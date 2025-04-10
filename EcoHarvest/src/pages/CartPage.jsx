@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const CartPage = () => {
   const [cart, setCart] = useState([]);
   const [userId, setUserId] = useState(null);
@@ -31,7 +33,7 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart?userId=${userId}`);
+      const response = await axios.get(`${API_URL}/api/cart?userId=${userId}`);
       setCart(response.data);
     } catch (err) {
       console.error("Error fetching cart:", err);
@@ -44,7 +46,7 @@ const CartPage = () => {
   const updateQuantity = async (productId, quantity) => {
     if (quantity < 1) return;
     try {
-      await axios.put(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart/${productId}`, {
+      await axios.put(`${API_URL}/api/cart/${productId}`, {
         userId,
         quantity: parseInt(quantity),
       });
@@ -56,7 +58,7 @@ const CartPage = () => {
 
   const removeItem = async (productId) => {
     try {
-      await axios.delete(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart/${productId}`, {
+      await axios.delete(`${API_URL}/api/cart/${productId}`, {
         data: { userId },
       });
       fetchCart();
@@ -100,7 +102,7 @@ const CartPage = () => {
                 <td>{item.name}</td>
                 <td>
                   <img
-                    src={`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/${item.image_url}`}
+                    src={`${API_URL}/${item.image_url}`}
                     alt={item.name}
                     width="60"
                     height="60"

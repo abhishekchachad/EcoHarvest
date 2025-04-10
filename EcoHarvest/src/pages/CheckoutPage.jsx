@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -43,7 +45,7 @@ const CheckoutPage = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart?userId=${userId}`);
+      const response = await axios.get(`${API_URL}/api/cart?userId=${userId}`);
       setCart(response.data);
 
       const total = response.data.reduce((sum, item) => {
@@ -58,7 +60,7 @@ const CheckoutPage = () => {
   const clearCart = async () => {
     try {
       for (const item of cart) {
-        await axios.delete(`https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/cart/${item.product_id}`, {
+        await axios.delete(`${API_URL}/api/cart/${item.product_id}`, {
           data: { userId }
         });
       }

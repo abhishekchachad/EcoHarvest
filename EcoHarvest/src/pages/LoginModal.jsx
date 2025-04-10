@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const LoginModal = ({ onClose, onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +13,7 @@ const LoginModal = ({ onClose, onLogin }) => {
     
     // Make API call to login
     try {
-      const response = await fetch('https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/login', {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

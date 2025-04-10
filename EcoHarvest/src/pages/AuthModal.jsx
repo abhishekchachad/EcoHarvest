@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 // Constants matching your database constraints
 const ALLOWED_ROLES = [
   { value: 'customer', label: 'Customer' },
@@ -67,7 +69,7 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
     try {
       if (mode === 'login') {
         // Make API call to login
-        const response = await fetch('https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/login', {
+        const response = await fetch(`${API_URL}/api/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: formData.email, password: formData.password }),
@@ -84,7 +86,7 @@ const AuthModal = ({ mode, onClose, onLogin, onSignup, switchMode }) => {
         }
       } else {
         // Make API call to signup
-        const response = await fetch('https://ecoharvestbackend-9q0e3lm2n-abhishekchachads-projects.vercel.app/api/signup', {
+        const response = await fetch(`${API_URL}/api/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
