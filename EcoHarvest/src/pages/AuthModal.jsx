@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = 'https://ecoharvestbackend.vercel.app'; // Replace with your actual API URL";
 
 // Constants matching your database constraints
 const ALLOWED_ROLES = [
