@@ -47,7 +47,7 @@ const HomePage = () => {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch("https://ecoharvestbackend-ek9vrg6up-abhishekchachads-projects.vercel.app.vercel.app/api/login", {
+      const response = await fetch("https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const HomePage = () => {
 
   const handleSignup = async (email, password, username) => {
     try {
-      const response = await fetch("https://ecoharvestbackend-ek9vrg6up-abhishekchachads-projects.vercel.app.vercel.app/api/signup", {
+      const response = await fetch("https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

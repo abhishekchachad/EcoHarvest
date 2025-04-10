@@ -31,7 +31,7 @@ const CartPage = () => {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get(`https://ecoharvestbackend-ek9vrg6up-abhishekchachads-projects.vercel.app.vercel.app/api/cart?userId=${userId}`);
+      const response = await axios.get(`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/cart?userId=${userId}`);
       setCart(response.data);
     } catch (err) {
       console.error("Error fetching cart:", err);
@@ -44,7 +44,7 @@ const CartPage = () => {
   const updateQuantity = async (productId, quantity) => {
     if (quantity < 1) return;
     try {
-      await axios.put(`https://ecoharvestbackend-ek9vrg6up-abhishekchachads-projects.vercel.app.vercel.app/api/cart/${productId}`, {
+      await axios.put(`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/cart/${productId}`, {
         userId,
         quantity: parseInt(quantity),
       });
@@ -56,7 +56,7 @@ const CartPage = () => {
 
   const removeItem = async (productId) => {
     try {
-      await axios.delete(`https://ecoharvestbackend-ek9vrg6up-abhishekchachads-projects.vercel.app.vercel.app/api/cart/${productId}`, {
+      await axios.delete(`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/api/cart/${productId}`, {
         data: { userId },
       });
       fetchCart();
@@ -100,7 +100,7 @@ const CartPage = () => {
                 <td>{item.name}</td>
                 <td>
                   <img
-                    src={`https://ecoharvestbackend-ek9vrg6up-abhishekchachads-projects.vercel.app.vercel.app/${item.image_url}`}
+                    src={`https://ecoharvestbackend-mi1loaz3g-abhishekchachads-projects.vercel.app/${item.image_url}`}
                     alt={item.name}
                     width="60"
                     height="60"
