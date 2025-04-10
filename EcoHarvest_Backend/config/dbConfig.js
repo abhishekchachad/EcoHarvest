@@ -1,3 +1,5 @@
+
+// const sql = require('mssql'); // Use this for Azure SQL Database
 // require('dotenv').config(); // at the top
 
 // Use this for LocalDB
@@ -13,7 +15,6 @@
 // };
 
 
-const sql = require('mssql'); // Use this for Azure SQL Database
 require('dotenv').config();
 
 const sql = require('mssql'); // Ensure you are using the right package for your environment
