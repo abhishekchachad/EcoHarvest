@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   try {
     const pool = await poolPromise;
     const result = await pool.request()
-      .query('SELECT * FROM dbo.Products WHERE DeleteFlag = "N"');
+      .query(`SELECT * FROM dbo.Products WHERE DeleteFlag = 'N'`);
     res.status(200).json(result.recordset);
   } catch (err) {
     console.error('Error on executing the query: ', err.message);
