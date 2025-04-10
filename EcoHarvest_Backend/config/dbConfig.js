@@ -13,9 +13,9 @@ require('dotenv').config(); // at the top
 // };
 
 
+const sql = require('mssql'); // Use this for Azure SQL Database
 console.log('DB_HOST:', process.env.DB_HOST); // Add this line
 
-const sql = require('mssql'); // Use this for Azure SQL Database
 const config = {
   server: process.env.DB_HOST,        // Azure SQL Database server URL (without "http://")
   database: process.env.DB_NAME,      // Your database name
