@@ -1,19 +1,19 @@
 // middleware.js
 
-export function middleware(req) {
-    const res = new Response(null, {
-      headers: {
-        'Access-Control-Allow-Origin': 'ecoharvest-nine.vercel.app', // Or specify your frontend domain
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    });
+// export function middleware(req) {
+//     const res = new Response(null, {
+//       headers: {
+//         'Access-Control-Allow-Origin': 'ecoharvest-nine.vercel.app', // Or specify your frontend domain
+//         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+//         'Access-Control-Allow-Headers': 'Content-Type',
+//       },
+//     });
   
-    // Handle preflight
-    if (req.method === 'OPTIONS') {
-      return res;
-    }
+//     // Handle preflight
+//     if (req.method === 'OPTIONS') {
+//       return res;
+//     }
   
-    return NextResponse.next(); // Allow the request to proceed
-  }
+//     return NextResponse.next(); // Allow the request to proceed
+//   }
   
