@@ -36,7 +36,7 @@ testConnection();
 const getProducts = async (req, res) => {
   try {
     const pool = await poolPromise;
-    const result = await pool.request().query("SELECT * FROM dbo.Products WHERE DeleteFlag = 'N'");
+    const result = await pool.request().query(`SELECT * FROM dbo.Products WHERE DeleteFlag = 'N'`);
     res.json(result.recordset);
   } catch (err) {
     res.status(500).json({ error: err.message });

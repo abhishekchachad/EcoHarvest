@@ -2,7 +2,7 @@
 import { poolPromise } from '../config/dbConfig';
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "https://ecoharvest-nine.vercel.app");
+  res.setHeader("Access-Control-Allow-Origin", "ecoharvest-nine.vercel.app");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 

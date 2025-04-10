@@ -19,11 +19,6 @@ const Products = () => {
       try {
         // const response = await axios.get("http://localhost:5000/api/products");  // Correct backend URL
         const response = await axios.get(`${API_URL}/api/products`);  // Correct backend URL
-        
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
         console.log("Fetched Products:", response.data);  // Log the response
         setProducts(response.data);
         setLoading(false);
