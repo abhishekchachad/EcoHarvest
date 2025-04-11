@@ -35,6 +35,11 @@ testConnection();
 // ✅ Fetch All Products (Exclude Soft Deleted)
 const getProducts = async (req, res) => {
   try {
+    
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+
     const pool = await poolPromise;
     const result = await pool.request().query(`SELECT * FROM dbo.Products WHERE DeleteFlag = 'N'`);
     res.json(result.recordset);
@@ -45,6 +50,10 @@ const getProducts = async (req, res) => {
 
 // ✅ Add Product
 const addProduct = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+
   const { name, price, description, stock_quantity, category } = req.body;
   const imageUrl = req.file ? `uploads/${req.file.filename}` : null;
 
@@ -71,6 +80,10 @@ const addProduct = async (req, res) => {
 
 // ✅ Update Product
 const updateProduct = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+
   const { name, price, description, stock_quantity, category } = req.body;
   const product_id = req.params.id;
   const newImageUrl = req.file ? `uploads/${req.file.filename}` : null;
@@ -108,6 +121,10 @@ const updateProduct = async (req, res) => {
 
 // ✅ Soft Delete
 const softDeleteProduct = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+
   try {
     const pool = await poolPromise;
     await pool.request()
@@ -121,6 +138,10 @@ const softDeleteProduct = async (req, res) => {
 };
 // Get product by ID
 const getProductById = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+
   const { product_id } = req.params;
 
   try {
