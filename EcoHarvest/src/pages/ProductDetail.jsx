@@ -12,7 +12,11 @@ const ProductDetail = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchProduct = async (req, res) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+      res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+    
       try {
         console.log("Fetching product with ID:", product_id);
         const response = await axios.get(`${API_URL}/api/products/${product_id}`);
