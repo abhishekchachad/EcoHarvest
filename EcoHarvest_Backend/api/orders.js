@@ -1,10 +1,10 @@
 // api/orders.js
+
+//import { setCorsHeaders } from '../config/setCorsHeaders';
+
 export default async function handler(req, res) {
   
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-
+   // setCorsHeaders (res); // Set CORS headers
     if (req.method === 'POST') {
       // Logic for creating an order
       res.status(200).json({ message: 'Order placed successfully' });
