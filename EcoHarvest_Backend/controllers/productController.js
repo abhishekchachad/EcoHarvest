@@ -19,17 +19,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const testConnection = async () => {
-  try {
-    const pool = await poolPromise;
-    const result = await pool.request().query('SELECT 1');
-    console.log('Database connected successfully');
-  } catch (err) {
-    console.error('Database connection failed:', err);
-  }
-};
+// const testConnection = async () => {
+//   try {
+//     const pool = await poolPromise;
+//     const result = await pool.request().query('SELECT 1');
+//     console.log('Database connected successfully');
+//   } catch (err) {
+//     console.error('Database connection failed:', err);
+//   }
+// };
 
-testConnection();
+// testConnection();
 
 
 // ✅ Fetch All Products (Exclude Soft Deleted)
