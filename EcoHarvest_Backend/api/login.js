@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   
-  //setCorsHeaders (res); // Set CORS headers
+  setCorsHeaders (res); // Set CORS headers
   if (req.method === 'POST') {
     const { email, password } = req.body;
 
