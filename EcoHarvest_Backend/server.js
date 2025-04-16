@@ -38,11 +38,6 @@ app.get('/api/data', (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
-// Your routes
-app.post('/api/login', (req, res) => {
-  loginapi(req, res);
-  res.json({ success: true });
-});
 
 
 // Signup Route

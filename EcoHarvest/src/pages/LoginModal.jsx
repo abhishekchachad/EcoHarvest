@@ -11,31 +11,28 @@ const LoginModal = ({ onClose, onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Make API call to login
     try {
-      fetch('https://ecoharvestbackend.vercel.app/api/login', {
+      const response = await fetch(`${API_URL}/api/login`, { // Added response declaration
         method: 'POST',
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          // Add other headers if needed
         },
         body: JSON.stringify({email, password})
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        // Call the onLogin prop with user data and token
-        localStorage.setItem("token", data.token);  // Save JWT token to localStorage
+        localStorage.setItem("token", data.token);
         onLogin(data.token);
         onClose();
       } else {
-        setError(data.message);  // Display error message if login fails
+        setError(data.message || 'Login failed');
       }
     } catch (err) {
       console.error("Login error:", err);
-      setError('An error occurred during login.');
+      setError('Failed to connect to server');
     }
   };
 
