@@ -11,6 +11,7 @@ const LoginModal = ({ onClose, onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    console.log("Request body:", {email, password}); 
     try {
       const response = await fetch(`${API_URL}/api/login`, { // Added response declaration
         method: 'POST',
