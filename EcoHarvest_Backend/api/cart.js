@@ -1,3 +1,5 @@
+import { getCartItems } from "../../../controllers/cartController";
+
 export default async function handler(req, res) {
   const origin = req.headers.origin || "*";
 
@@ -16,14 +18,10 @@ export default async function handler(req, res) {
 
   // Handle GET or POST
   if (req.method === "GET") {
-    const { userId } = req.query;
-
-    // Replace this with your actual DB logic
-    res.status(200).json({
-      message: `Fetched cart for user ${userId}`,
-      data: [] // e.g., cart items here
-    });
-  } else {
-    res.status(405).json({ message: "Method Not Allowed" });
+    return getCartItems(req, res);
   }
+
+   else {
+    res.status(405).json({ message: "Method Not Allowed" });
+   }
 }
