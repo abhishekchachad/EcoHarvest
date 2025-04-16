@@ -1,4 +1,4 @@
-import { getCartItems } from "../../../controllers/cartController";
+import { getCartItems, addToCart } from "../../../controllers/cartController";
 
 export default async function handler(req, res) {
   const origin = req.headers.origin || "*";
