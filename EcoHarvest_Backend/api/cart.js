@@ -18,6 +18,10 @@ export default async function handler(req, res) {
   }
 
   // Handle GET or POST
+  if (req.method === "POST") {
+    return addToCart(req, res);
+  }
+  // Handle GET or POST
   if (req.method === "GET") {
     return getCartItems(req, res);
   }
