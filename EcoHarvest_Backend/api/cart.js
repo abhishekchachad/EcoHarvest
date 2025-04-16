@@ -1,5 +1,5 @@
 // api/cart.js
-//import { setCorsHeaders } from '../config/setCorsHeaders';
+import { setCorsHeaders } from '../config/setCorsHeaders';
 
 export default async function handler(req, res) {
   
