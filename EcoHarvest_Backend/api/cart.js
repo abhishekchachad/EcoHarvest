@@ -1,26 +1,29 @@
-// api/cart.js
-// import { setCorsHeaders } from '../config/setCorsHeaders';
-
 export default async function handler(req, res) {
+  const origin = req.headers.origin || "*";
 
-  const origin = req.headers.get("origin") || "*";
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", origin || "*");
+  res.setHeader("Access-Control-Allow-Origin", origin);
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-  res.setHeader("Access-Control-Allow-Headers", req.headers["access-control-request-headers"] || "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Requested-With"
+  );
 
-  //setCorsHeaders (res); // Set CORS headers
+  // Handle preflight
   if (req.method === "OPTIONS") {
-    res.status(200).end(); // Stop preflight here
-    return;
+    return res.status(200).end();
   }
 
-  // setCorsHeaders (res); // Set CORS headers
-    if (req.method === 'GET') {
-      // Logic for adding items to the cart
-      res.status(200).json({ message: 'Product added to cart' });
-    } else {
-      res.status(405).json({ message: 'Method Not Allowed' });
-    }
+  // Handle GET or POST
+  if (req.method === "GET") {
+    const { userId } = req.query;
+
+    // Replace this with your actual DB logic
+    res.status(200).json({
+      message: `Fetched cart for user ${userId}`,
+      data: [] // e.g., cart items here
+    });
+  } else {
+    res.status(405).json({ message: "Method Not Allowed" });
   }
-  
+}
