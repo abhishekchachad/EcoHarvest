@@ -12,6 +12,11 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
 
+  // Handle preflight request
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
    // setCorsHeaders (res); // Set CORS headers
   if (req.method === 'POST') {
     const { email, password, username, role = 'customer' } = req.body;
