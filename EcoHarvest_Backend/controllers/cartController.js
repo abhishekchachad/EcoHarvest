@@ -2,6 +2,24 @@ const { sql, poolPromise } = require("../config/dbConfig");
 
 // Add or update cart
 exports.addToCart = async (req, res) => {
+
+  const origin = req.headers.origin || "*";
+
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", origin);
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Requested-With"
+  );
+  
+ // Handle preflight
+ if (req.method === "OPTIONS") {
+  return res.status(200).end();
+}
+
+
+
   const { userId, product_id, quantity } = req.body;
 
   try {
