@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     "Content-Type, Authorization, X-Requested-With"
   );
 
+  console.log("Request method:", req.method); 
   // Handle preflight
   if (req.method === "OPTIONS") {
     return res.status(200).end();
@@ -21,7 +22,6 @@ export default async function handler(req, res) {
     return getCartItems(req, res);
   }
 
-   else {
-    res.status(405).json({ message: "Method Not Allowed" });
-   }
+   res.status(405).json({ message: "Method Not Allowed" });
+   
 }
