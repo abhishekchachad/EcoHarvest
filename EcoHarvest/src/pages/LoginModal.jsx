@@ -13,12 +13,14 @@ const LoginModal = ({ onClose, onLogin }) => {
     
     // Make API call to login
     try {
-      const response = await fetch(`${API_URL}/api/login`, {
+      fetch('https://ecoharvestbackend.vercel.app/api/login', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          // Add other headers if needed
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({email, password})
       });
 
       const data = await response.json();

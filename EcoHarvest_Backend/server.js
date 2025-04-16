@@ -8,7 +8,8 @@ const orderRoutes = require("./routes/orderRoutes");
 const path = require("path"); 
 const productRoutes = require("./routes/productRoutes"); // Ensure correct path
 const messageRoutes = require("./routes/messageRoutes");
-
+const loginapi = require("./api/login"); // Ensure correct path
+const signupapi = require("./api/signup"); // Ensure correct path
 
 const app = express();
 
@@ -18,13 +19,15 @@ app.use(cors());
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 
-// Allow ALL origins (⚠️ Not recommended for production)
 app.use(cors({
-  origin: '*', // Wildcard allows any domain
+  origin: 'https://ecoharvest-nine.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  // credentials: true // ❌ Cannot use with origin: '*'
+  credentials: true
 }));
+
+// Handle OPTIONS requests (preflight) explicitly
+app.options('*', cors());
 
 // Your routes...
 app.get('/api/data', (req, res) => {
@@ -35,7 +38,11 @@ app.get('/api/data', (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
-
+// Your routes
+app.post('/api/login', (req, res) => {
+  loginapi(req, res);
+  res.json({ success: true });
+});
 
 
 // Signup Route

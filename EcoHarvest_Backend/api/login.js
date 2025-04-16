@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   //   return res.status(200).end();
   // }
 
-  setCorsHeaders (res); // Set CORS headers
+  // setCorsHeaders (res); // Set CORS headers
 
   if (req.method === 'POST') {
     const { email, password } = req.body;
