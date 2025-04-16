@@ -16,10 +16,27 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
+
+
+// Allow ALL origins (⚠️ Not recommended for production)
+app.use(cors({
+  origin: '*', // Wildcard allows any domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  // credentials: true // ❌ Cannot use with origin: '*'
+}));
+
+// Your routes...
+app.get('/api/data', (req, res) => {
+  res.json({ message: "CORS is open to the world! 🌍" });
+});
+
 // ✅ Set up the API route for products, cart, and orders
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
+
+
 
 // Signup Route
 app.post("/api/signup", async (req, res) => {
