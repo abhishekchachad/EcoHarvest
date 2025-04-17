@@ -6,11 +6,6 @@
       "use": "@vercel/node"
     }
   ],
-  "projects": {
-    "ecoharvest_backend": {
-      "rootDirectory": "EcoHarvest_Backend"
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
