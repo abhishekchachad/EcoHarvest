@@ -22,7 +22,7 @@ const AdminPage = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(`${API_URL}/api/products`);
+            const response = await axios.get(`https://ecoharvestbackend.vercel.app/api/products`);
             setProducts(response.data);
         } catch (error) {
             console.error("Error fetching products:", error);
@@ -47,11 +47,11 @@ const AdminPage = () => {
 
         try {
             if (editingId) {
-                await axios.put(`${API_URL}/api/products/${editingId}`, formData, {
+                await axios.put(`https://ecoharvestbackend.vercel.app/api/products/${editingId}`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
             } else {
-                await axios.post(`${API_URL}/api/products`, formData, {
+                await axios.post(`https://ecoharvestbackend.vercel.app/api/products`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
             }
@@ -77,12 +77,12 @@ const AdminPage = () => {
         setDescription(product.description);
         setStockQuantity(product.stock_quantity);
         setCategory(product.category);
-        setPreviewImage(`${API_URL}/${product.image_url}`);
+        setPreviewImage(`https://ecoharvestbackend.vercel.app/${product.image_url}`);
     };
 
     const handleDelete = async (id) => {
         try {
-            await axios.put(`${API_URL}/api/products/delete/${id}`);
+            await axios.put(`https://ecoharvestbackend.vercel.app/api/products/delete/${id}`);
             fetchProducts();
         } catch (error) {
             console.error("Error deleting product:", error);
@@ -143,7 +143,7 @@ const AdminPage = () => {
                     }}>
                     <td style={{ padding: "10px" }}>
                         <img
-                        src={`${API_URL}/${product.image_url}`}
+                        src={`https://ecoharvestbackend.vercel.app/${product.image_url}`}
                         alt={product.name}
                         className="product-image"
                         style={{

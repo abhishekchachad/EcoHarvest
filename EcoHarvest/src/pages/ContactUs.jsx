@@ -14,7 +14,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API_URL}/api/messages`, { email, message });
+      await axios.post(`https://ecoharvestbackend.vercel.app/api/messages`, { email, message });
       setSuccess(true);
       setError("");
       setEmail("");
