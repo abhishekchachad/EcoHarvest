@@ -326,7 +326,7 @@ html, body {
 
 /* ====== About Us Page Styles ====== */
 .about-container {
-  max-width: 800px;
+  max-width: 1300px;
   margin: 40px auto;
   padding: 20px;
   background-color: white;
@@ -344,7 +344,7 @@ html, body {
   font-size: 1rem;
   color: #555;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .about-container ul {
@@ -356,7 +356,7 @@ html, body {
   padding: 10px;
   background: #f1f8e9;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 /* ====== Admin Panel Styles ====== */
