@@ -2,7 +2,9 @@
 import { poolPromise } from '../config/dbConfig';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-//import { setCorsHeaders } from '../config/setCorsHeaders';
+
+import { setCorsHeaders } from '../config/setCorsHeaders';
+
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -17,11 +19,7 @@ app.use(cors({
 
 export default async function handler(req, res) {
   
-  res.setHeader('Access-Control-Allow-Origin', 'https://ecoharvest-nine.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.status(200).send();
+  if (setCorsHeaders(req, res)) return;
 
   if (req.method === 'POST') {
     const { email, password } = req.body;

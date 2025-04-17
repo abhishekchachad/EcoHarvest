@@ -1,16 +1,9 @@
-import { getCartItems, addToCart } from "../../../controllers/cartController";
+import { getCartItems, addToCart } from "../controllers/cartController";
+import { setCorsHeaders } from '../config/setCorsHeaders';
 
 export default async function handler(req, res) {
-  // const origin = req.headers.origin || "*";
-
-  // res.setHeader("Access-Control-Allow-Credentials", "true");
-  // res.setHeader("Access-Control-Allow-Origin", origin);
-  // res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-  // res.setHeader(
-  //   "Access-Control-Allow-Headers",
-  //   "Content-Type, Authorization, X-Requested-With"
-  // );
-
+  if (setCorsHeaders(req, res)) return;
+  
   console.log("Request method:", req.method); 
   // Handle preflight
   if (req.method === "OPTIONS") {

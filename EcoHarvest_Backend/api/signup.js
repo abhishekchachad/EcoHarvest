@@ -1,26 +1,11 @@
 // api/signup.js
 import { poolPromise } from '../config/dbConfig';
 import bcrypt from 'bcryptjs';
-//import { setCorsHeaders } from '../config/setCorsHeaders';
+import { setCorsHeaders } from '../config/setCorsHeaders';
 
 export default async function handler(req, res) {
   
-  // const origin = req.headers.origin || "*";
-
-  // res.setHeader("Access-Control-Allow-Credentials", "true");
-  // res.setHeader("Access-Control-Allow-Origin", origin);
-  // res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-  // res.setHeader(
-  //   "Access-Control-Allow-Headers",
-  //   "Content-Type, Authorization, X-Requested-With"
-  // );
-
-  // if (req.method === "OPTIONS") {
-  //   // Preflight request
-  //   return res.status(200).end();
-  // }
-
-  //setCorsHeaders (res); // Set CORS headers
+  if (setCorsHeaders(req, res)) return;
 
   if (req.method === 'POST') {
     const { email, password, username, role = 'customer' } = req.body;
