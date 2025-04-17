@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaEdit, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaPlusCircle, FaUserShield } from "react-icons/fa";
 import "../styles/index.css";
 
 const AdminPage = () => {
@@ -90,29 +90,39 @@ const AdminPage = () => {
     return (
         <div className="admin-container">
             <h2 style={{ marginBottom: "20px" }}>
-                <FaPlusCircle style={{ marginRight: "8px" }} />
+            <FaUserShield style={{ marginRight: "8px" }} />
                 Admin Panel
             </h2>
 
             {/* ✅ Form for Adding/Updating Products */}
-            <form
-                onSubmit={handleSubmit}
-                encType="multipart/form-data"
-                style={{ marginBottom: "30px", display: "grid", gap: "12px", maxWidth: "600px" }}
-            >
+            <form onSubmit={handleSubmit} encType="multipart/form-data" className="admin-form">
                 <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
                 <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required />
                 <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
                 <input type="number" placeholder="Stock Quantity" value={stockQuantity} onChange={(e) => setStockQuantity(e.target.value)} required />
                 <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
                 <input type="file" accept="image/*" onChange={handleFileChange} />
-                <button type="submit" style={{ padding: "10px", fontSize: "16px" }}>
+                {previewImage && (
+                <img
+                    src={previewImage}
+                    alt="Preview"
+                    style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                    borderRadius: "6px"
+                    }}
+                />
+                )}
+                <button type="submit">
                     <FaPlusCircle style={{ marginRight: "6px" }} />
                     {editingId ? "Update Product" : "Add Product"}
                 </button>
-            </form>
+                </form>
+
 
             {/* ✅ Table to Display Products */}
+            <div className="admin-table-wrapper">
             <div style={{ overflowX: "auto" }}>
             <table className="admin-table" style={{
                 width: "100%",
@@ -188,7 +198,7 @@ const AdminPage = () => {
                 </tbody>
             </table>
             </div>
-
+            </div>
         </div>
     );
 };

@@ -52,16 +52,16 @@ const HomePage = () => {
     }
   };
 
-  const handleShopClick = () => {
-    if (isLoggedIn) {
-      // Redirect to products if logged in
-      window.location.href = "/products";
-    } else {
-      // Show auth modal in login mode if not logged in
-      setAuthMode("login");
-      setShowAuthModal(true);
-    }
-  };
+  // const handleShopClick = () => {
+  //   if (isLoggedIn) {
+  //     // Redirect to products if logged in
+  //     window.location.href = "/products";
+  //   } else {
+  //     // Show auth modal in login mode if not logged in
+  //     setAuthMode("login");
+  //     setShowAuthModal(true);
+  //   }
+  // };
 
   const handleLogin = async (email, password) => {
     try {
@@ -139,7 +139,7 @@ const HomePage = () => {
             farming solutions that nurture both people and the environment.
           </p>
           <div className="hero-buttons">
-            <button className="shop-button" onClick={handleShopClick}>
+            <button className="shop-button" onClick={() => window.location.href="/products" /*handleShopClick*/}>
               Shop Organic Products
             </button>
             <button className="shop-button" onClick={() => window.location.href="/about"}>
