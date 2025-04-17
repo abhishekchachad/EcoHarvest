@@ -4,10 +4,10 @@ import { poolPromise } from '../config/dbConfig';
 
 export default async function handler(req, res) {
 
-  // res.setHeader("Access-Control-Allow-Credentials", "true");
-  // res.setHeader("Access-Control-Allow-Origin", origin || "*");
-  // res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
-  // res.setHeader("Access-Control-Allow-Headers", req.headers["access-control-request-headers"] || "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", origin || "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,PATCH,DELETE,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", req.headers["access-control-request-headers"] || "*");
 
   //setCorsHeaders (res); // Set CORS headers
   if (req.method === "OPTIONS") {
