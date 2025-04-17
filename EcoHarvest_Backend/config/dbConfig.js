@@ -11,7 +11,7 @@ const config = {
   options: {
     encrypt: true,
     enableArithAbort: true,
-    trustServerCertificate: true // Only use in development environment
+    //trustServerCertificate: true // Only use in development environment
   }
 };
 
