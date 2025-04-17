@@ -73,7 +73,8 @@ const CartPage = () => {
     );
   }
 
-  return (
+  return (   <div className="page-container"> {/* Add this wrapper div */}
+      <div className="content-wrap"> {/* Add this content wrapper */}
     <div className="container mt-5">
       <h2>Your Cart 🛒</h2>
       {loading ? (
@@ -133,6 +134,8 @@ const CartPage = () => {
         </div>
       )}
     </div>
+    </div>
+    </div> // Close the wrapper div
   );
 };
 

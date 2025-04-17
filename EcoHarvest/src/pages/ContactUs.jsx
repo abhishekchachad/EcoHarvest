@@ -12,7 +12,7 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/messages", { email, message });
+      // await axios.post("http://localhost:5000/api/messages", { email, message });
       setSuccess(true);
       setError("");
       setEmail("");
