@@ -6,6 +6,11 @@
       "use": "@vercel/node"
     }
   ],
+  "projects": {
+    "ecoharvest_backend": {
+      "rootDirectory": "EcoHarvest_Backend"
+    }
+  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -16,10 +21,5 @@
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, X-Requested-With" }
       ]
     }
-  ],
-    "projects": {
-      "ecoharvest_backend": {
-        "rootDirectory": "EcoHarvest_Backend"
-      }
-    }
+  ]
 }
