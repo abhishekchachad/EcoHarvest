@@ -39,6 +39,28 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 
+// Enable CORS with specific settings
+app.use(cors({
+  origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
+// Explicitly handle OPTIONS requests
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', true);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.status(200).send();
+});
+
+app.use((req, res, next) => {
+  console.log(`Incoming ${req.method} request to ${req.path}`);
+  console.log('Headers:', req.headers);
+  next();
+});
 
 // Signup Route
 app.post("/api/signup", async (req, res) => {

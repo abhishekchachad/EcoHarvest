@@ -11,9 +11,8 @@ const LoginModal = ({ onClose, onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    console.log("Request body:", {email, password}); 
     try {
-      const response = await fetch(`${API_URL}/api/login`, { // Added response declaration
+      const response = await fetch('https://ecoharvestbackend.vercel.app/api/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -22,18 +21,17 @@ const LoginModal = ({ onClose, onLogin }) => {
         body: JSON.stringify({email, password})
       });
   
-      const data = await response.json();
-  
-      if (response.ok) {
-        localStorage.setItem("token", data.token);
-        onLogin(data.token);
-        onClose();
-      } else {
-        setError(data.message || 'Login failed');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Login failed');
       }
+  
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      onLogin(data.token);
+      onClose();
     } catch (err) {
-      console.error("Login error:", err);
-      setError('Failed to connect to server');
+      setError(err.message);
     }
   };
 

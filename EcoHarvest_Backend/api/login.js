@@ -3,19 +3,25 @@ import { poolPromise } from '../config/dbConfig';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 //import { setCorsHeaders } from '../config/setCorsHeaders';
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Enable CORS with specific settings
+app.use(cors({
+  origin: 'https://ecoharvest-nine.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 export default async function handler(req, res) {
   
-  res.setHeader("Access-Control-Allow-Origin", "https://ecoharvest-nine.vercel.app");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  // setCorsHeaders (res); // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'https://ecoharvest-nine.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.status(200).send();
 
   if (req.method === 'POST') {
     const { email, password } = req.body;
